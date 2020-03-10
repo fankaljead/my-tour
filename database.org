@@ -1,5 +1,5 @@
 * 数据库设计
-** 用户 User
+** 用户 user
    - 编号 id
    - 名字 name
    - 电话 tel
@@ -16,76 +16,75 @@
    - 微信 wechat
    - 国家 country
    - 注册时间 register_time
-** 粉丝 Fans
+** 粉丝 fans
    - 编号 id
    - 关注者 follower_id
    - 被关注者 user_id
    - 关注时间 time
-** 游记
-   - 编号
-   - 创建时间
-   - 标题
-   - 游记时间
-   - 地点
-   - 内容
-   - 封面
-   - 状态（发布，草稿，）
-   - 预定发布时间
-   - 作者
-   - 话题
-** 游记话题
-   - 编号
-   - 名称
-   - 描述
-   - 创建时间
-   - 创建人
-** 景点
-   - 编号
-   - 名称
-   - 简称
-   - 背景
-   - 地点
-   - 描述
-   - 编辑时间
-   - 类别
-   - 评分
-** 景点点评
-  - 编号
-  - 标题
-  - 背景
-  - 内容
-  - 点评者
-  - 评分
-
-** 景点类别
-   - 编号
-   - 名称
-   - 描述
-   - 创建时间
-   - 创建人
-** 自驾游
-   - 编号
-   - 名称
-   - 描述
-   - 封面
-   - 创建人
-   - 创建时间
-   - 点赞数
-** 自驾游日程
-   - 编号
-   - 标题
-   - 描述
-   - 第几天
-   - 自驾游编号
-   - 景点编号
-   - 创建时间
-   - 创建者
-** 自驾游日程景点
-   - 编号
-   - 自驾游编号
-   - 景点编号
-   - 上个景点
-   - 创建时间
-   - 地点
-   - 创建者
+** 游记 travel_note 
+   - 编号 id
+   - 创建时间 create_time
+   - 标题 title
+   - 游记时间 travel_note_date
+   - 地点 place
+   - 内容 content
+   - 封面 cover
+   - 状态（发布，草稿，）draft
+   - 预定发布时间 publish_time
+   - 作者 author
+   - 话题 travel_note_topic_id
+** 游记话题  travel_note_topic
+   - 编号 id
+   - 名称 name
+   - 描述 description
+   - 创建时间 create_time
+   - 创建人 create_user_id
+** 景点 scenary_spot
+   - 编号 id
+   - 名称 name
+   - 简称 short_name
+   - 背景 background
+   - 地点 location
+   - 描述 description
+   - 编辑时间 edit_time
+   - 类别 scenary_spot_catagory_id
+   - 评分 score
+** 景点点评 scenary_spot_comment
+  - 编号 id
+  - 标题 title
+  - 背景 background
+  - 内容 content
+  - 点评者 user_id
+  - 评分 score
+** 景点类别 scenary_spot_catagory
+   - 编号 id
+   - 名称 name
+   - 描述 description
+   - 创建时间 create_time
+   - 创建人 create_user_id
+** 自驾游 self_driving_tour
+   - 编号 id
+   - 名称 name
+   - 描述 description
+   - 封面 cover
+   - 创建人 create_user_id
+   - 创建时间 create_time
+   - 点赞数 star
+** 自驾游日程 self_driving_tour_days
+   - 编号 id
+   - 标题 title
+   - 描述 description
+   - 第几天 day_number
+   - 自驾游编号 self_driving_tour_id
+   - 景点编号 scenary_spot_id
+   - 创建时间 create_time
+   - 创建者 create_user_id
+** 自驾游日程景点 self_driving_tour_day_scenary_spot
+   - 编号 id
+   - 自驾游编号 self_driving_tour_id
+   - 景点编号 scenary_spot_id
+   - 上个景点 previous_scenary_spot_id
+   - 创建时间 create_time
+   - 地点 location
+   - 创建者 create_user_id
 

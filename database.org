@@ -52,17 +52,25 @@
 ** 景点点评 scenary_spot_comment
   - 编号 id
   - 标题 title
-  - 背景 background
+  # - 背景 background
   - 内容 content
   - 点评者 user_id
+  - 景点编号 scenary_spot_id
+  - 赞数 star_number
   - 评分 score
+** 景点评论
+   - 编号
+   - 用户
+   - 内容
+   - 点赞数
+   - 创建时间
 ** 景点类别 scenary_spot_catagory
    - 编号 id
    - 名称 name
    - 描述 description
    - 创建时间 create_time
    - 创建人 create_user_id
-** 自驾游 self_driving_tour
+** 个人游 self_tour
    - 编号 id
    - 名称 name
    - 描述 description
@@ -70,21 +78,66 @@
    - 创建人 create_user_id
    - 创建时间 create_time
    - 点赞数 star
-** 自驾游日程 self_driving_tour_days
+** 个人游日程 self_tour_days
    - 编号 id
    - 标题 title
    - 描述 description
    - 第几天 day_number
-   - 自驾游编号 self_driving_tour_id
+   - 个人游编号 self_tour_id
    - 景点编号 scenary_spot_id
    - 创建时间 create_time
    - 创建者 create_user_id
-** 自驾游日程景点 self_driving_tour_day_scenary_spot
+** 个人游日程景点 self_tour_day_scenary_spot
    - 编号 id
-   - 自驾游编号 self_driving_tour_id
+   - 个人游编号 self_tour_id
    - 景点编号 scenary_spot_id
    - 上个景点 previous_scenary_spot_id
    - 创建时间 create_time
    - 地点 location
    - 创建者 create_user_id
-
+** 个人游点评 self_tour_comment
+  - 编号 id
+  - 标题 title
+  # - 背景 background
+  - 个人游编号 self_tour_id
+  - 内容 content
+  - 点评者 user_id
+  - 评分 score
+  - 赞数 star_number
+** 个人游日程评论 self_tour_days
+  - 编号 id
+  - 标题 title
+  # - 背景 background
+  - 个人游编号 self_tour_id
+  - 内容 content
+  - 点评者 user_id
+  - 评分 score
+  - 赞数 star_number
+** 用户私信 user_message
+   - 编号 id
+   - 类型 type
+   - 内容 content
+   - 发送者 sender
+   - 接受者 receiver
+   - 是否已接收 is_receive
+   - 发送时间 send_time
+** 交通方式 transport_way
+   - 编号 id
+   - 名称 name
+   - 描述 description
+   - 封面 cover
+   - 创建时间 create_time
+   - 创建人 create_user_id
+** 路线 guideline
+   - 编号 id
+   - 从哪里 from_where
+   - 到哪里 to_where
+   - 交通方式 transport_way_id
+   - 个人的想法 personal_thought
+   - 创建人 create_user_id
+** 照片 photos
+   - 编号 id
+   - 类型 type
+   - 地址 src
+   - 上传时间 upload_time
+   - 上传者 upload_user_id

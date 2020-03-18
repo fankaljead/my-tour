@@ -6,7 +6,7 @@ import (
 	"testing"
 	"runtime"
 	"path/filepath"
-	_ "github.com/fankaljead/my-tour/my-tour-server/routers"
+	_ "gitlab.com/fankaljead/my-tour/my-tour-server/routers"
 
 	"github.com/astaxie/beego"
 	. "github.com/smartystreets/goconvey/convey"

@@ -1,7 +1,7 @@
 package controllers
 
 import (
-	"github.com/fankaljead/my-tour/my-tour-server/models"
+	"gitlab.com/fankaljead/my-tour/my-tour-server/models"
 	"encoding/json"
 
 	"github.com/astaxie/beego"

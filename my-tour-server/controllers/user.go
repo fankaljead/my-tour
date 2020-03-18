@@ -1,8 +1,9 @@
 package controllers
 
 import (
-	"github.com/fankaljead/my-tour/my-tour-server/models"
 	"encoding/json"
+
+	"gitlab.com/fankaljead/my-tour/my-tour-server/models"
 
 	"github.com/astaxie/beego"
 )
@@ -116,4 +117,3 @@ func (u *UserController) Logout() {
 	u.Data["json"] = "logout success"
 	u.ServeJSON()
 }
-

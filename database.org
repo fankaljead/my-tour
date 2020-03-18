@@ -141,7 +141,6 @@
    - 地址 src
    - 上传时间 upload_time
    - 上传者 upload_user_id
-<<<<<<< HEAD
    - 路线或者地点编号 guideline_or_location_id
 ** 个人动态 personal_dynamic
    - 编号 id
@@ -184,4 +183,3 @@
    - 标签编号 tag_id
    - 对应类型 to_type_id
    - 创建时间 create_time
-

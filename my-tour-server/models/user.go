@@ -14,6 +14,7 @@ func init() {
 	UserList = make(map[string]*User)
 	u := User{"user_11111", "astaxie", "11111", Profile{"male", 20, "Singapore", "astaxie@gmail.com"}}
 	UserList["user_11111"] = &u
+
 }
 
 type User struct {
@@ -33,6 +34,7 @@ type Profile struct {
 func AddUser(u User) string {
 	u.Id = "user_" + strconv.FormatInt(time.Now().UnixNano(), 10)
 	UserList[u.Id] = &u
+
 	return u.Id
 }
 

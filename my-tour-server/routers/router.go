@@ -8,7 +8,7 @@
 package routers
 
 import (
-	"github.com/fankaljead/my-tour/my-tour-server/controllers"
+	"gitlab.com/fankaljead/my-tour/my-tour-server/controllers"
 
 	"github.com/astaxie/beego"
 )
@@ -23,6 +23,11 @@ func init() {
 		beego.NSNamespace("/user",
 			beego.NSInclude(
 				&controllers.UserController{},
+			),
+		),
+		beego.NSNamespace("/person",
+			beego.NSInclude(
+				&controllers.PersonController{},
 			),
 		),
 	)

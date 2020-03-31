@@ -1,88 +1,88 @@
 package models
 
 import (
-	"errors"
 	"strconv"
-	"time"
+
+	"github.com/astaxie/beego/orm"
+
+	_ "github.com/go-sql-driver/mysql"
 )
 
-var (
-	UserList map[string]*User
+const (
+	// 登录成功
+	LOGIN_SUCCESS = iota
+	// 登录失败 用户不存在
+	LOGIN_USER_NOT_EXIST
+	// 登录失败 密码错误
+	LOGIN_PASSWORD_NOT_MATCH
 )
 
 func init() {
-	UserList = make(map[string]*User)
-	u := User{"user_11111", "astaxie", "11111", Profile{"male", 20, "Singapore", "astaxie@gmail.com"}}
-	UserList["user_11111"] = &u
 
+	orm.RegisterDriver("mysql", orm.DRMySQL)
+	orm.RegisterDataBase("default", "mysql", "zxh:212kawhi@tcp(127.0.0.1:3306)/test?charset=utf8", 30)
+	orm.RegisterModel(new(User))
+	// create table
+	// orm.RunSyncdb("default", true, true)
 }
 
 type User struct {
-	Id       string
-	Username string
-	Password string
-	Profile  Profile
+	Id       int64  `form:"-"` //`orm:"pk"`
+	Username string `form:"username"`
+	Password string `form:"password"`
+	// Id       int64
+	// Username string
+	// Password string
 }
 
-type Profile struct {
-	Gender  string
-	Age     int
-	Address string
-	Email   string
-}
+func AddUser(u User) int64 {
+	o := orm.NewOrm()
+	id, err := o.Insert(&u)
+	if err != nil {
 
-func AddUser(u User) string {
-	u.Id = "user_" + strconv.FormatInt(time.Now().UnixNano(), 10)
-	UserList[u.Id] = &u
-
-	return u.Id
+	}
+	return id
 }
 
 func GetUser(uid string) (u *User, err error) {
-	if u, ok := UserList[uid]; ok {
-		return u, nil
+	o := orm.NewOrm()
+	err = o.Raw("SELECT id, username,password FROM user WHERE id = ?", uid).QueryRow(&u)
+	return
+}
+
+func GetAllUsers() (users []User, num int64, err error) {
+	o := orm.NewOrm()
+	num, err = o.Raw("SELECT id, username,password FROM user ").QueryRows(&users)
+	return
+}
+
+func UpdateUser(uid string, uu *User) (num int64, err error) {
+	o := orm.NewOrm()
+	num, err = o.QueryTable("user").Filter("id", uu.Id).Update(orm.Params{
+		"username": uu.Username,
+		"password": uu.Password,
+	})
+	return
+}
+
+func Login(username, password string) int {
+	o := orm.NewOrm()
+
+	var user User
+	err := o.QueryTable("user").Filter("username", username).One(&user, "password")
+
+	if err != nil {
+		return LOGIN_USER_NOT_EXIST
 	}
-	return nil, errors.New("User not exists")
-}
-
-func GetAllUsers() map[string]*User {
-	return UserList
-}
-
-func UpdateUser(uid string, uu *User) (a *User, err error) {
-	if u, ok := UserList[uid]; ok {
-		if uu.Username != "" {
-			u.Username = uu.Username
-		}
-		if uu.Password != "" {
-			u.Password = uu.Password
-		}
-		if uu.Profile.Age != 0 {
-			u.Profile.Age = uu.Profile.Age
-		}
-		if uu.Profile.Address != "" {
-			u.Profile.Address = uu.Profile.Address
-		}
-		if uu.Profile.Gender != "" {
-			u.Profile.Gender = uu.Profile.Gender
-		}
-		if uu.Profile.Email != "" {
-			u.Profile.Email = uu.Profile.Email
-		}
-		return u, nil
+	if password == user.Password {
+		return LOGIN_SUCCESS
 	}
-	return nil, errors.New("User Not Exist")
+	return LOGIN_PASSWORD_NOT_MATCH
 }
 
-func Login(username, password string) bool {
-	for _, u := range UserList {
-		if u.Username == username && u.Password == password {
-			return true
-		}
-	}
-	return false
-}
-
-func DeleteUser(uid string) {
-	delete(UserList, uid)
+func DeleteUser(uid string) (num int64, err error) {
+	o := orm.NewOrm()
+	id, _ := strconv.ParseInt(uid, 10, 64)
+	num, err = o.Delete(&User{Id: id})
+	return
 }

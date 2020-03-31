@@ -2,8 +2,11 @@
 ** 用户 user
    - 编号 id
    - 名字 name
-   - 电话 tel
    - 密码 password
+** 用户信息 user_info
+   - 编号 id
+   - 用户编号 user_id
+   - 电话 tel
    - 生日 birthday
    - 头像 head_icon
    - 背景图片 background_img
@@ -16,6 +19,14 @@
    - 微信 wechat
    - 国家 country
    - 注册时间 register_time
+** 爱好 hobby
+   - 编号 id
+   - 名称 title
+   - 描述 description
+** 用户爱好 user_hobby
+   - 编号 id
+   - 用户编号 user_id
+   - 爱好编号 hobby_id
 ** 粉丝 fans
    - 编号 id
    - 关注者 follower_id

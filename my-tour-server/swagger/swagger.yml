@@ -218,6 +218,53 @@ paths:
       responses:
         "200":
           description: '{string} logout success'
+  /user_info/:
+    get:
+      tags:
+      - user_info
+      description: get all Users information
+      operationId: User_InfoController.GetAll
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/models.UserInfo'
+    put:
+      tags:
+      - user_info
+      description: create user information
+      operationId: User_InfoController.UpdateUserInfo
+      parameters:
+      - in: body
+        name: body
+        description: body for user_info content
+        required: true
+        schema:
+          $ref: '#/definitions/models.UserInfo'
+      responses:
+        "200":
+          description: '{int} models.UserInfo.Id'
+        "403":
+          description: body is empty
+  /user_info/{user_id}:
+    get:
+      tags:
+      - user_info
+      description: get user_info by user_id
+      operationId: User_InfoController.Get
+      parameters:
+      - in: path
+        name: uid
+        description: The key for staticblock
+        required: true
+        type: string
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/models.UserInfo'
+        "403":
+          description: :uid is empty
 definitions:
   models.Object:
     title: Object
@@ -241,35 +288,32 @@ definitions:
         type: string
       Username:
         type: string
-  models.User_Info:
-    title: User_Info
+  models.UserInfo:
+    title: UserInfo
     type: object
     properties:
-      Background_Image:
+      BackgroundImage:
         type: string
       Birthday:
         type: string
       Email:
         type: string
-      Head_Icon:
+      HeadIcon:
         type: string
-      Hobby:
-        type: integer
-        format: int64
       Id:
         type: integer
         format: int64
       Location:
         type: string
-      Personalized_Signature:
+      PersonalizedSignature:
         type: string
       Qq:
         type: string
-      Register_Time:
-        type: string
       Tel:
         type: string
-      User_id:
+      UpdateTime:
+        type: string
+      UserId:
         type: integer
         format: int64
       Wechat:
@@ -281,3 +325,6 @@ tags:
 - name: user
   description: |
     Operations about Users
+- name: user_info
+  description: |
+    Operations about UserInfo

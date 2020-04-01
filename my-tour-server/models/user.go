@@ -4,8 +4,7 @@ import (
 	"strconv"
 
 	"github.com/astaxie/beego/orm"
-
-	_ "github.com/go-sql-driver/mysql"
+	// _ "github.com/go-sql-driver/mysql"
 )
 
 const (
@@ -19,8 +18,8 @@ const (
 
 func init() {
 
-	orm.RegisterDriver("mysql", orm.DRMySQL)
-	orm.RegisterDataBase("default", "mysql", "zxh:212kawhi@tcp(127.0.0.1:3306)/test?charset=utf8", 30)
+	// orm.RegisterDriver("mysql", orm.DRMySQL)
+	// orm.RegisterDataBase("default", "mysql", "zxh:212kawhi@tcp(127.0.0.1:3306)/test?charset=utf8", 30)
 	orm.RegisterModel(new(User))
 	// create table
 	// orm.RunSyncdb("default", true, true)

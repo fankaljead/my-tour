@@ -14,7 +14,7 @@
    - 邮箱 email
    - 常住地 location
    - 性别 sex
-   - 爱好 hobby
+   # - 爱好 hobby
    - 个性签名 personalized_signature
    - 微信 wechat
    - 国家 country

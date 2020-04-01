@@ -117,9 +117,27 @@ func init() {
 
     beego.GlobalControllerRouter["gitlab.com/fankaljead/my-tour/my-tour-server/controllers:User_InfoController"] = append(beego.GlobalControllerRouter["gitlab.com/fankaljead/my-tour/my-tour-server/controllers:User_InfoController"],
         beego.ControllerComments{
-            Method: "Post",
+            Method: "Put",
             Router: `/`,
-            AllowHTTPMethods: []string{"post"},
+            AllowHTTPMethods: []string{"put"},
+            MethodParams: param.Make(),
+            Filters: nil,
+            Params: nil})
+
+    beego.GlobalControllerRouter["gitlab.com/fankaljead/my-tour/my-tour-server/controllers:User_InfoController"] = append(beego.GlobalControllerRouter["gitlab.com/fankaljead/my-tour/my-tour-server/controllers:User_InfoController"],
+        beego.ControllerComments{
+            Method: "GetAll",
+            Router: `/`,
+            AllowHTTPMethods: []string{"get"},
+            MethodParams: param.Make(),
+            Filters: nil,
+            Params: nil})
+
+    beego.GlobalControllerRouter["gitlab.com/fankaljead/my-tour/my-tour-server/controllers:User_InfoController"] = append(beego.GlobalControllerRouter["gitlab.com/fankaljead/my-tour/my-tour-server/controllers:User_InfoController"],
+        beego.ControllerComments{
+            Method: "Get",
+            Router: `/:user_id`,
+            AllowHTTPMethods: []string{"get"},
             MethodParams: param.Make(),
             Filters: nil,
             Params: nil})

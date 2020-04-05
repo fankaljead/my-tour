@@ -2,6 +2,7 @@ package models
 
 import (
 	"fmt"
+	"time"
 
 	"github.com/astaxie/beego/orm"
 )
@@ -64,11 +65,36 @@ func (u *UserInfo) TableName() string {
 	return "user_info"
 }
 
-func GetUserInfo(user_id string) (user_info *UserInfo, err error) {
+func GetUserInfo(user_id string) (user_info UserInfo, err error) {
 	o := orm.NewOrm()
-	sql := "select * from " + user_info.TableName() + " where user_id="
-	fmt.Println(sql)
+	sql := "select * from " + user_info.TableName() + " where user_id=?"
 	err = o.Raw(sql, user_id).QueryRow(&user_info)
 
+	return
+}
+
+func GetAllUserInfo() (user_infos []UserInfo, num int64, err error) {
+	o := orm.NewOrm()
+	num, err = o.Raw("select * from user_info").QueryRows(&user_infos)
+	return
+}
+
+func SetUserHeadIcon(user_id string, head_icon string) (num int64, err error) {
+	o := orm.NewOrm()
+	update_time := time.Now().String()
+	res, err := o.Raw("update user_info set head_icon=? , update_time = ? where user_id=?", head_icon, update_time, user_id).Exec()
+	if err == nil {
+		num, err = res.RowsAffected()
+	}
+	return
+}
+
+func SetUserBackgroundImage(user_id string, background_image string) (num int64, err error) {
+	o := orm.NewOrm()
+	update_time := time.Now().String()
+	res, err := o.Raw("update user_info set background_image=? , update_time = ? where user_id=?", background_image, update_time, user_id).Exec()
+	if err == nil {
+		num, err = res.RowsAffected()
+	}
 	return
 }

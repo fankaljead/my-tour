@@ -115,7 +115,7 @@ func init() {
             Filters: nil,
             Params: nil})
 
-    beego.GlobalControllerRouter["gitlab.com/fankaljead/my-tour/my-tour-server/controllers:User_InfoController"] = append(beego.GlobalControllerRouter["gitlab.com/fankaljead/my-tour/my-tour-server/controllers:User_InfoController"],
+    beego.GlobalControllerRouter["gitlab.com/fankaljead/my-tour/my-tour-server/controllers:UserInfoController"] = append(beego.GlobalControllerRouter["gitlab.com/fankaljead/my-tour/my-tour-server/controllers:UserInfoController"],
         beego.ControllerComments{
             Method: "Put",
             Router: `/`,
@@ -124,7 +124,7 @@ func init() {
             Filters: nil,
             Params: nil})
 
-    beego.GlobalControllerRouter["gitlab.com/fankaljead/my-tour/my-tour-server/controllers:User_InfoController"] = append(beego.GlobalControllerRouter["gitlab.com/fankaljead/my-tour/my-tour-server/controllers:User_InfoController"],
+    beego.GlobalControllerRouter["gitlab.com/fankaljead/my-tour/my-tour-server/controllers:UserInfoController"] = append(beego.GlobalControllerRouter["gitlab.com/fankaljead/my-tour/my-tour-server/controllers:UserInfoController"],
         beego.ControllerComments{
             Method: "GetAll",
             Router: `/`,
@@ -133,11 +133,29 @@ func init() {
             Filters: nil,
             Params: nil})
 
-    beego.GlobalControllerRouter["gitlab.com/fankaljead/my-tour/my-tour-server/controllers:User_InfoController"] = append(beego.GlobalControllerRouter["gitlab.com/fankaljead/my-tour/my-tour-server/controllers:User_InfoController"],
+    beego.GlobalControllerRouter["gitlab.com/fankaljead/my-tour/my-tour-server/controllers:UserInfoController"] = append(beego.GlobalControllerRouter["gitlab.com/fankaljead/my-tour/my-tour-server/controllers:UserInfoController"],
         beego.ControllerComments{
             Method: "Get",
             Router: `/:user_id`,
             AllowHTTPMethods: []string{"get"},
+            MethodParams: param.Make(),
+            Filters: nil,
+            Params: nil})
+
+    beego.GlobalControllerRouter["gitlab.com/fankaljead/my-tour/my-tour-server/controllers:UserInfoController"] = append(beego.GlobalControllerRouter["gitlab.com/fankaljead/my-tour/my-tour-server/controllers:UserInfoController"],
+        beego.ControllerComments{
+            Method: "SetBackgroundImage",
+            Router: `/set_background_image`,
+            AllowHTTPMethods: []string{"post"},
+            MethodParams: param.Make(),
+            Filters: nil,
+            Params: nil})
+
+    beego.GlobalControllerRouter["gitlab.com/fankaljead/my-tour/my-tour-server/controllers:UserInfoController"] = append(beego.GlobalControllerRouter["gitlab.com/fankaljead/my-tour/my-tour-server/controllers:UserInfoController"],
+        beego.ControllerComments{
+            Method: "SetIcon",
+            Router: `/set_icon`,
+            AllowHTTPMethods: []string{"post"},
             MethodParams: param.Make(),
             Filters: nil,
             Params: nil})

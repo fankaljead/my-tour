@@ -64,17 +64,17 @@ func UpdateUser(uid string, uu *User) (num int64, err error) {
 	return
 }
 
-func Login(username, password string) int {
+func Login(username, password string) int64 {
 	o := orm.NewOrm()
 
 	var user User
-	err := o.QueryTable("user").Filter("username", username).One(&user, "password")
+	err := o.Raw("SELECT id, password FROM user WHERE username = ?", username).QueryRow(&user)
 
 	if err != nil {
 		return LOGIN_USER_NOT_EXIST
 	}
 	if password == user.Password {
-		return LOGIN_SUCCESS
+		return user.Id
 	}
 	return LOGIN_PASSWORD_NOT_MATCH
 }

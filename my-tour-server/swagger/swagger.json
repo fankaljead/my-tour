@@ -335,7 +335,7 @@
                     "user_info"
                 ],
                 "description": "get all Users information",
-                "operationId": "User_InfoController.GetAll",
+                "operationId": "UserInfoController.GetAll",
                 "responses": {
                     "200": {
                         "description": "",
@@ -350,7 +350,7 @@
                     "user_info"
                 ],
                 "description": "create user information",
-                "operationId": "User_InfoController.UpdateUserInfo",
+                "operationId": "UserInfoController.UpdateUserInfo",
                 "parameters": [
                     {
                         "in": "body",
@@ -372,17 +372,69 @@
                 }
             }
         },
+        "/user_info/set_background_image": {
+            "post": {
+                "tags": [
+                    "user_info"
+                ],
+                "description": "set background image for this user",
+                "operationId": "UserInfoController.Set Background Image",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "uploadname",
+                        "description": "The key for staticblock",
+                        "required": true,
+                        "type": "file"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{int} 1"
+                    },
+                    "403": {
+                        "description": "file is empty"
+                    }
+                }
+            }
+        },
+        "/user_info/set_icon": {
+            "post": {
+                "tags": [
+                    "user_info"
+                ],
+                "description": "set icon for this user",
+                "operationId": "UserInfoController.Set Head Icon",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "uploadname",
+                        "description": "The key for staticblock",
+                        "required": true,
+                        "type": "file"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{int} 1"
+                    },
+                    "403": {
+                        "description": "file is empty"
+                    }
+                }
+            }
+        },
         "/user_info/{user_id}": {
             "get": {
                 "tags": [
                     "user_info"
                 ],
                 "description": "get user_info by user_id",
-                "operationId": "User_InfoController.Get",
+                "operationId": "UserInfoController.Get",
                 "parameters": [
                     {
                         "in": "path",
-                        "name": "uid",
+                        "name": "user_id",
                         "description": "The key for staticblock",
                         "required": true,
                         "type": "string"

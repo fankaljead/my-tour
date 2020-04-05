@@ -7,7 +7,25 @@ import (
 	"gitlab.com/fankaljead/my-tour/my-tour-server/models"
 
 	"github.com/astaxie/beego"
+	"github.com/astaxie/beego/session"
 )
+
+// Global Sessions
+var GlobalSessions *session.Manager
+
+func init() {
+	sessionConfig := &session.ManagerConfig{
+		CookieName:      "gosessionid",
+		EnableSetCookie: true,
+		Gclifetime:      3600,
+		Maxlifetime:     3600,
+		Secure:          false,
+		CookieLifeTime:  3600,
+		ProviderConfig:  "./tmp",
+	}
+	GlobalSessions, _ = session.NewManager("memory", sessionConfig)
+	go GlobalSessions.GC()
+}
 
 // Operations about Users
 type UserController struct {
@@ -134,19 +152,21 @@ func (u *UserController) Login() {
 
 	username := u.GetString("username")
 	password := u.GetString("password")
+
+	r := u.Ctx.Request
+	w := u.Ctx.ResponseWriter
+	sess, _ := GlobalSessions.SessionStart(w, r)
+	defer sess.SessionRelease(w)
+
 	fmt.Println("Login in ")
 	fmt.Println(username)
-	switch models.Login(username, password) {
-	case models.LOGIN_SUCCESS:
-		u.Data["json"] = "login success"
-		break
-	case models.LOGIN_PASSWORD_NOT_MATCH:
-		u.Data["json"] = "password does not match"
-		break
-	case models.LOGIN_USER_NOT_EXIST:
-		u.Data["json"] = "user not exist"
-		break
-	}
+	user_id := models.Login(username, password)
+	fmt.Println("user_id")
+	fmt.Println(user_id)
+	u.Data["json"] = user_id
+
+	sess.Set("user_id", user_id)
+
 	u.ServeJSON()
 }
 
@@ -156,5 +176,10 @@ func (u *UserController) Login() {
 // @router /logout [get]
 func (u *UserController) Logout() {
 	u.Data["json"] = "logout success"
+
+	r := u.Ctx.Request
+	w := u.Ctx.ResponseWriter
+	GlobalSessions.SessionDestroy(w, r)
+
 	u.ServeJSON()
 }

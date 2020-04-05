@@ -27,7 +27,7 @@ func init() {
 		),
 		beego.NSNamespace("/user_info",
 			beego.NSInclude(
-				&controllers.User_InfoController{},
+				&controllers.UserInfoController{},
 			),
 		),
 	)

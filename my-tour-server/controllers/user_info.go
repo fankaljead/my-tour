@@ -1,14 +1,17 @@
 package controllers
 
 import (
+	"fmt"
+	"log"
 	"strconv"
+	"time"
 
 	"github.com/astaxie/beego"
 	"gitlab.com/fankaljead/my-tour/my-tour-server/models"
 )
 
 // Operations about UserInfo
-type User_InfoController struct {
+type UserInfoController struct {
 	beego.Controller
 }
 
@@ -18,7 +21,7 @@ type User_InfoController struct {
 // @Success 200 {int} models.UserInfo.Id
 // @Failure 403 body is empty
 // @router / [put]
-func (u *User_InfoController) Put() {
+func (u *UserInfoController) Put() {
 	// var user_info *models.UserInfo
 	user_info := new(models.UserInfo)
 	// json.Unmarshal(u.Ctx.Input.RequestBody, &user)
@@ -66,6 +69,8 @@ func (u *User_InfoController) Put() {
 		user_info.HeadIcon = head_icon
 	}
 
+	user_info.UpdateTime = time.Now().String()
+
 	// user_info.Tel = u.GetString("tel")
 
 	uid := models.UpdateUserInfo(user_info)
@@ -78,22 +83,92 @@ func (u *User_InfoController) Put() {
 // @Description get all Users information
 // @Success 200 {object} models.UserInfo
 // @router / [get]
-func (u *User_InfoController) GetAll() {
-	u.Data["json"] = ""
+func (u *UserInfoController) GetAll() {
+	data := make(map[string]interface{})
+
+	user_infos, num, _ := models.GetAllUserInfo()
+
+	data["user_infos"] = user_infos
+	data["length"] = num
+
+	u.Data["json"] = data
 	u.ServeJSON()
 }
 
 // @Title Get
 // @Description get user_info by user_id
-// @Param	uid		path 	string	true		"The key for staticblock"
+// @Param	user_id		path 	string	true		"The key for staticblock"
 // @Success 200 {object} models.UserInfo
 // @Failure 403 :uid is empty
 // @router /:user_id [get]
-func (u *User_InfoController) Get() {
+func (u *UserInfoController) Get() {
 	user_id := u.GetString(":user_id")
 	if user_id != "" {
 		user_info, _ := models.GetUserInfo(user_id)
 		u.Data["json"] = user_info
 	}
 	u.ServeJSON()
+}
+
+// @Title Set Head Icon
+// @Description set icon for this user
+// @Param	uploadname		path 	file	true		"The key for staticblock"
+// @Success 200 {int} 1
+// @Failure 403 file is empty
+// @Content-Type multipart/form-data
+// @router /set_icon [post]
+func (c *UserInfoController) SetIcon() {
+	f, h, err := c.GetFile("uploadname")
+	// user_id := c.GetString(":user_id")
+	user_id := "1"
+
+	if err != nil {
+		c.Data["json"] = 0
+		log.Fatal("getfile err ", err)
+	} else {
+		head_icon := beego.AppConfig.String("uploadStaticDir") + "/" + user_id + h.Filename
+		c.SaveToFile("uploadname", head_icon) // 保存位置在 static/upload, 没有文件夹要先创建
+
+		num, _ := models.SetUserHeadIcon(user_id, head_icon)
+
+		c.Data["json"] = num
+	}
+	defer f.Close()
+	c.ServeJSON()
+}
+
+// @Title Set Background Image
+// @Description set background image for this user
+// @Param	uploadname		path 	file	true		"The key for staticblock"
+// @Success 200 {int} 1
+// @Failure 403 file is empty
+// @Content-Type multipart/form-data
+// @router /set_background_image [post]
+func (c *UserInfoController) SetBackgroundImage() {
+	f, h, err := c.GetFile("uploadname")
+	// user_id := c.GetString(":user_id")
+	// user_id := "1"
+
+	r := c.Ctx.Request
+	w := c.Ctx.ResponseWriter
+	sess, _ := GlobalSessions.SessionStart(w, r)
+	defer sess.SessionRelease(w)
+	user_id := fmt.Sprintf("%v", sess.Get("user_id"))
+
+	fmt.Println("session user id")
+	fmt.Println(user_id)
+
+	if err != nil {
+		c.Data["json"] = 0
+		log.Fatal("getfile err ", err)
+	} else {
+		head_icon := beego.AppConfig.String("uploadStaticDir") + "/" + user_id + h.Filename
+		c.SaveToFile("uploadname", head_icon) // 保存位置在 static/upload, 没有文件夹要先创建
+
+		num, _ := models.SetUserBackgroundImage(user_id, head_icon)
+
+		c.Data["json"] = num
+	}
+	defer f.Close()
+	c.ServeJSON()
 }

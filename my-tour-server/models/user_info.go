@@ -1,7 +1,6 @@
 package models
 
 import (
-	"fmt"
 	"time"
 
 	"github.com/astaxie/beego/orm"
@@ -55,7 +54,6 @@ func UpdateUserInfo(user_info *UserInfo) int64 {
 	id, err := o.InsertOrUpdate(user_info)
 
 	if err != nil {
-		fmt.Println(err)
 		return -1
 	}
 

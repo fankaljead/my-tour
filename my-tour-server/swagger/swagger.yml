@@ -11,6 +11,49 @@ info:
     url: http://www.apache.org/licenses/LICENSE-2.0.html
 basePath: /v1
 paths:
+  /hobby/:
+    post:
+      tags:
+      - hobby
+      description: add user hobby
+      operationId: HobbyController.AddUserHobby
+      parameters:
+      - in: path
+        name: title
+        description: The hobby you want to add
+        required: true
+        type: string
+      responses:
+        "200":
+          description: '{int} models.UserHobby.Id'
+        "403":
+          description: body is empty
+    delete:
+      tags:
+      - hobby
+      description: delete user hobby
+      operationId: HobbyController.DeleteUserHobby
+      parameters:
+      - in: path
+        name: user_hobby_id
+        description: The hobby you want to delete
+        required: true
+        type: integer
+        format: int64
+      responses:
+        "200":
+          description: '{int} models.UserHobby.Id'
+        "403":
+          description: body is empty
+  /hobby/getAllUserHobbies:
+    get:
+      tags:
+      - hobby
+      description: get all user hobbies
+      operationId: HobbyController.GetAllUserHobbies
+      responses:
+        "200":
+          description: '{map[string]interface{}}'
   /object/:
     get:
       tags:
@@ -360,5 +403,8 @@ tags:
   description: |
     Operations about Users
 - name: user_info
+  description: |
+    Operations about UserInfo
+- name: hobby
   description: |
     Operations about UserInfo

@@ -30,6 +30,11 @@ func init() {
 				&controllers.UserInfoController{},
 			),
 		),
+		beego.NSNamespace("/hobby",
+			beego.NSInclude(
+				&controllers.HobbyController{},
+			),
+		),
 	)
 	beego.AddNamespace(ns)
 }

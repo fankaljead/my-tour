@@ -42,7 +42,7 @@
    - 封面 cover
    - 状态（发布，草稿，）draft
    - 预定发布时间 publish_time
-   - 作者 author
+   - 作者 author_id
    - 话题 travel_note_topic_id
 ** 游记话题  travel_note_topic
    - 编号 id

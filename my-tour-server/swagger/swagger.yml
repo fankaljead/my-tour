@@ -11,6 +11,51 @@ info:
     url: http://www.apache.org/licenses/LICENSE-2.0.html
 basePath: /v1
 paths:
+  /fan/followUser:
+    post:
+      tags:
+      - fan
+      description: follow user
+      operationId: FansController.FollowUser
+      parameters:
+      - in: path
+        name: follower_id
+        description: The user id you want to follow
+        required: true
+        type: integer
+        format: int64
+      responses:
+        "200":
+          description: '{int} models.Fans.Id'
+        "403":
+          description: body is empty
+  /fan/getAllFollowers:
+    get:
+      tags:
+      - fan
+      description: get all user followers
+      operationId: FansController.GetAllFollowers
+      responses:
+        "200":
+          description: '{map[string]interface{}}'
+  /fan/unfollowUser:
+    post:
+      tags:
+      - fan
+      description: unfollow user
+      operationId: FansController.UnfollowUser
+      parameters:
+      - in: path
+        name: follower_id
+        description: The user id you want to follow
+        required: true
+        type: integer
+        format: int64
+      responses:
+        "200":
+          description: '{int} models.Fans.Id'
+        "403":
+          description: body is empty
   /hobby/:
     post:
       tags:

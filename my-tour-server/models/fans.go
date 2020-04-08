@@ -27,22 +27,28 @@ func FollowUser(user_id int64, follow_id int64) (int64, error) {
 }
 
 func UnfollowUser(user_id int64, follow_id int64) int64 {
-	fan := Fan{UserId: user_id, FollowerId: follow_id}
 	o := orm.NewOrm()
-	if num, err := o.Delete(&fan); err == nil {
+
+	res, err := o.Raw("delete from fan where user_id =? and follower_id=?", user_id, follow_id).Exec()
+	if err == nil {
+		num, _ := res.RowsAffected()
 		return num
 	}
+
 	return -1
 }
 
 func GetAllFollowers(user_id string) (followers_info map[string]interface{}) {
 	o := orm.NewOrm()
 
+	followers_info = make(map[string]interface{})
+
 	var followers []Fan
-	num, err := o.Raw("SELECT id, follower_id FROM user WHERE id = ?", user_id).QueryRows(&followers)
+	num, err := o.Raw("SELECT id, follower_id,user_id,time FROM fan WHERE user_id = ?", user_id).QueryRows(&followers)
 	if err == nil {
 		followers_info["followers"] = followers
 	}
 	followers_info["numeber"] = num
+
 	return
 }

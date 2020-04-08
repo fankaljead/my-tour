@@ -14,7 +14,7 @@ type FansController struct {
 // @Param	follower_id path 	int64	true		"The user id you want to follow"
 // @Success 200 {int} models.Fans.Id
 // @Failure 403 body is empty
-// @router /follow_user [post]
+// @router /followUser [post]
 func (u *FansController) FollowUser() {
 	user_id := int64(1)
 
@@ -31,7 +31,7 @@ func (u *FansController) FollowUser() {
 // @Param	follower_id path 	int64	true		"The user id you want to follow"
 // @Success 200 {int} models.Fans.Id
 // @Failure 403 body is empty
-// @router /unfollow_user [post]
+// @router /unfollowUser [post]
 func (u *FansController) UnfollowUser() {
 	user_id := int64(1)
 

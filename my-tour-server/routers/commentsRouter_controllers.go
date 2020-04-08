@@ -10,7 +10,7 @@ func init() {
     beego.GlobalControllerRouter["gitlab.com/fankaljead/my-tour/my-tour-server/controllers:FansController"] = append(beego.GlobalControllerRouter["gitlab.com/fankaljead/my-tour/my-tour-server/controllers:FansController"],
         beego.ControllerComments{
             Method: "FollowUser",
-            Router: `/follow_user`,
+            Router: `/followUser`,
             AllowHTTPMethods: []string{"post"},
             MethodParams: param.Make(),
             Filters: nil,
@@ -28,7 +28,7 @@ func init() {
     beego.GlobalControllerRouter["gitlab.com/fankaljead/my-tour/my-tour-server/controllers:FansController"] = append(beego.GlobalControllerRouter["gitlab.com/fankaljead/my-tour/my-tour-server/controllers:FansController"],
         beego.ControllerComments{
             Method: "UnfollowUser",
-            Router: `/unfollow_user`,
+            Router: `/unfollowUser`,
             AllowHTTPMethods: []string{"post"},
             MethodParams: param.Make(),
             Filters: nil,

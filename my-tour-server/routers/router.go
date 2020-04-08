@@ -35,6 +35,11 @@ func init() {
 				&controllers.HobbyController{},
 			),
 		),
+		beego.NSNamespace("/fan",
+			beego.NSInclude(
+				&controllers.FansController{},
+			),
+		),
 	)
 	beego.AddNamespace(ns)
 }

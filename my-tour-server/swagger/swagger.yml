@@ -188,6 +188,34 @@ paths:
           description: '{string} delete success!'
         "403":
           description: objectId is empty
+  /travel_note/:
+    post:
+      tags:
+      - travel_note
+      description: add travel note
+      operationId: TravelNoteController.AddTravelNote
+      parameters:
+      - in: path
+        name: title
+        description: "true"
+        type: string
+      - in: path
+        name: content
+        description: "true"
+        type: string
+      - in: path
+        name: cover
+        description: "true"
+        type: string
+      - in: path
+        name: publishTime
+        description: "true"
+        type: string
+      responses:
+        "200":
+          description: '{int} models.TravelNote.Id'
+        "403":
+          description: body is empty
   /user/:
     get:
       tags:

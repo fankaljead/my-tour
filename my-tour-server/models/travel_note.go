@@ -13,7 +13,7 @@ type TravelNote struct {
 	Place             string
 	Content           string
 	Cover             string
-	Draft             int
+	Draft             bool
 	TravelNoteTopicId int64
 	PublishTime       string
 	CreateTime        string
@@ -81,4 +81,26 @@ func GetAllUserTravelNoteInfo(user_id string) map[string]interface{} {
 
 	user_travel_note_infos["number"] = nums
 	return user_travel_note_infos
+}
+
+func SetTravelNoteDraft(travel_note_id int64) int64 {
+	o := orm.NewOrm()
+	res, err := o.Raw("UPDATE travel_note SET draft = false where id=?", travel_note_id).Exec()
+	if err == nil {
+		num, _ := res.RowsAffected()
+		return num
+	}
+
+	return -1
+}
+
+func PublishTravelNoteDraft(travel_note_id int64) int64 {
+	o := orm.NewOrm()
+	res, err := o.Raw("UPDATE travel_note SET draft = true where id=?", travel_note_id).Exec()
+	if err == nil {
+		num, _ := res.RowsAffected()
+		return num
+	}
+
+	return -1
 }

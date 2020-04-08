@@ -40,6 +40,11 @@ func init() {
 				&controllers.FansController{},
 			),
 		),
+		beego.NSNamespace("/travel_note",
+			beego.NSInclude(
+				&controllers.TravelNoteController{},
+			),
+		),
 	)
 	beego.AddNamespace(ns)
 }

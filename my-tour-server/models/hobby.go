@@ -66,14 +66,14 @@ func GetUserHobbies(user_id string) map[string]interface{} {
 	user_hobbies["user_id"] = user_id
 
 	var res []struct {
-		HobbyId     int64
-		UserHobbyId int64
-		Title       string
+		HobbyId     int64  `json:"hobby_id"`
+		UserHobbyId int64  `json:"user_hobby_id"`
+		Title       string `json:"title"`
 	}
 
 	// res := make(orm.Params)
 	o := orm.NewOrm()
-	// nums, err := o.Raw("SELECT hobby.title as title, hobby.id as hobbyId,user_hobby.id as userHobbyId FROM user_hobby left join hobby on user_hobby.hobby_id=hobby.id where user_hobby.user_id="+user_id).RowsToStruct(&res, "userHobbyId", "title hobbyId")
+	// nums, err := o.Raw("SELECT hobby.title as title, hobby.id as hobbyId,user_hobby.id as userHobbyId FROM user_hobby left join hobby on user_hobby.hobby_id=hobby.id where user_hobby.user_id="+user_id).RowsToStruct(res, "userHobbyId", "title")
 	nums, err := o.Raw("SELECT hobby.title as title, hobby.id as hobby_id,user_hobby.id as user_hobby_id FROM user_hobby left join hobby on user_hobby.hobby_id=hobby.id where user_hobby.user_id=" + user_id).QueryRows(&res)
 
 	if err == nil {

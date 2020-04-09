@@ -2,6 +2,10 @@
 
 ** my tour server
    使用 ~beego~ 框架开发
-   
+  /beego/ 
+  *beego*
+  =Golang=
+  _Emacs_
+  `Neovim`
 ** my tour app
 

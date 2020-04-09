@@ -7,16 +7,28 @@ import (
 )
 
 type TravelNote struct {
-	Id                int64
-	AuthorId          int64
-	Title             string
-	Place             string
-	Content           string
-	Cover             string
-	Draft             bool
-	TravelNoteTopicId int64
-	PublishTime       string
-	CreateTime        string
+	Id                int64  `json:"travel_note_id"`
+	AuthorId          int64  `json:"author_id"`
+	Title             string `json:"title"`
+	Place             string `json:"place"`
+	Content           string `json:"content"`
+	Cover             string `json:"cover"`
+	Draft             bool   `json:"draft"`
+	TravelNoteTopicId int64  `json:"travel_note_topic_id"`
+	PublishTime       string `json:"publish_time"`
+	CreateTime        string `json:"creat_time"`
+}
+
+type TravelNoteTopic struct {
+	Id           int64
+	CreateUserId int64
+	Name         string
+	Description  string
+	CreateTime   string
+}
+
+func init() {
+	orm.RegisterModel(new(TravelNote))
 }
 
 func AddTravelNote(title string, content string, cover string,
@@ -73,7 +85,7 @@ func GetAllUserTravelNoteInfo(user_id string) map[string]interface{} {
 		Cover      string `json:"cover"`
 		CreateTime string `json:"create_time"`
 	}
-	nums, err := o.Raw("select id,title,cover,creat_time, from travel_note where author_id=" + user_id).QueryRows(&res)
+	nums, err := o.Raw("select id,title,cover,create_time from travel_note where author_id=" + user_id).QueryRows(&res)
 
 	if err == nil {
 		user_travel_note_infos["travelNoteInfos"] = res

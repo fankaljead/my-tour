@@ -63,11 +63,11 @@ paths:
       description: add user hobby
       operationId: HobbyController.AddUserHobby
       parameters:
-      - in: path
+      - in: string
         name: title
         description: The hobby you want to add
-        required: true
-        type: string
+        schema:
+          $ref: '#/definitions/true'
       responses:
         "200":
           description: '{int} models.UserHobby.Id'
@@ -211,9 +211,98 @@ paths:
         name: publishTime
         description: "true"
         type: string
+      - in: path
+        name: travel_note_id
+        description: "true"
+        type: integer
+        format: int64
       responses:
         "200":
           description: '{int} models.TravelNote.Id'
+        "403":
+          description: body is empty
+    delete:
+      tags:
+      - travel_note
+      description: delete travel note by id
+      operationId: TravelNoteController.DeleteTravelNote
+      parameters:
+      - in: path
+        name: travel_note_id
+        description: The travel note you want to delete
+        required: true
+        type: integer
+        format: int64
+      responses:
+        "200":
+          description: '{int} models.TravelNote.Id'
+        "403":
+          description: body is empty
+  /travel_note/{travel_note_id}:
+    get:
+      tags:
+      - travel_note
+      description: get travel note by travel note id
+      operationId: TravelNoteController.GetTravelNoteById
+      parameters:
+      - in: path
+        name: travel_note_id
+        description: The key for staticblock
+        required: true
+        type: integer
+        format: int64
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/models.TravelNote'
+        "403":
+          description: :uid is empty
+  /travel_note/getAllTravelNoteInfo:
+    get:
+      tags:
+      - travel_note
+      description: get travel all note by user id
+      operationId: TravelNoteController.GetAllTravelNoteInfoByUserId
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/models.TravelNote'
+        "403":
+          description: travel note info is empty
+  /travel_note/publishTravelNote:
+    post:
+      tags:
+      - travel_note
+      description: publish travel note
+      operationId: TravelNoteController.PublishTravelNoteDraft
+      parameters:
+      - in: int64
+        name: travel_note_id
+        description: body for user content
+        schema:
+          $ref: '#/definitions/true'
+      responses:
+        "200":
+          description: '{int}'
+        "403":
+          description: body is empty
+  /travel_note/setTravelNoteDraft:
+    post:
+      tags:
+      - travel_note
+      description: set travel note as draft
+      operationId: TravelNoteController.SetTravelNoteDraft
+      parameters:
+      - in: int64
+        name: travel_note_id
+        description: body for user content
+        schema:
+          $ref: '#/definitions/true'
+      responses:
+        "200":
+          description: '{int}'
         "403":
           description: body is empty
   /user/:
@@ -427,6 +516,33 @@ definitions:
       Score:
         type: integer
         format: int64
+  models.TravelNote:
+    title: TravelNote
+    type: object
+    properties:
+      author_id:
+        type: integer
+        format: int64
+      content:
+        type: string
+      cover:
+        type: string
+      creat_time:
+        type: string
+      draft:
+        type: boolean
+      place:
+        type: string
+      publish_time:
+        type: string
+      title:
+        type: string
+      travel_note_id:
+        type: integer
+        format: int64
+      travel_note_topic_id:
+        type: integer
+        format: int64
   models.User:
     title: User
     type: object
@@ -468,6 +584,9 @@ definitions:
         format: int64
       Wechat:
         type: string
+  "true":
+    title: "true"
+    type: object
 tags:
 - name: object
   description: |

@@ -14,14 +14,15 @@ type HobbyController struct {
 
 // @Title AddUserHobby
 // @Description  add user hobby
-// @Param	title path 	string	true		"The hobby you want to add"
+// @Param	title string	true		"The hobby you want to add"
 // @Success 200 {int} models.UserHobby.Id
 // @Failure 403 body is empty
 // @router / [post]
 func (u *HobbyController) Post() {
 	// user_id := 1
 	title := u.GetString("title")
-	user_id := int64(1)
+	// fmt.Printf("hobby controller hobby title is :   %s\n\n", title)
+	user_id := GetCurrentSessionUserIdInt64()
 	hobby_id := models.AddHobby(title)
 	id := models.AddUserHobby(user_id, hobby_id)
 

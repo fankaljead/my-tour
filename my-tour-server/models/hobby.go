@@ -26,8 +26,10 @@ func AddHobby(title string) int64 {
 	o := orm.NewOrm()
 	var hobby Hobby
 	hobby.Title = title
-	o.ReadOrCreate(&hobby, "id")
-	if created, id, err := o.ReadOrCreate(&hobby, "title"); err == nil {
+	// o.ReadOrCreate(&hobby, "id")
+	// fmt.Printf("hobby title is :   %s\n\n", title)
+	// fmt.Printf("hobby is :   %v\n\n", hobby)
+	if created, id, err := o.ReadOrCreate(&hobby, "Title"); err == nil {
 		if created {
 			// fmt.Println("New Insert an object. Id:", id)
 			return id

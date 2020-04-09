@@ -115,6 +115,60 @@ func init() {
             Filters: nil,
             Params: nil})
 
+    beego.GlobalControllerRouter["gitlab.com/fankaljead/my-tour/my-tour-server/controllers:TravelNoteController"] = append(beego.GlobalControllerRouter["gitlab.com/fankaljead/my-tour/my-tour-server/controllers:TravelNoteController"],
+        beego.ControllerComments{
+            Method: "UpdateTravelNote",
+            Router: `/`,
+            AllowHTTPMethods: []string{"post"},
+            MethodParams: param.Make(),
+            Filters: nil,
+            Params: nil})
+
+    beego.GlobalControllerRouter["gitlab.com/fankaljead/my-tour/my-tour-server/controllers:TravelNoteController"] = append(beego.GlobalControllerRouter["gitlab.com/fankaljead/my-tour/my-tour-server/controllers:TravelNoteController"],
+        beego.ControllerComments{
+            Method: "Delete",
+            Router: `/`,
+            AllowHTTPMethods: []string{"delete"},
+            MethodParams: param.Make(),
+            Filters: nil,
+            Params: nil})
+
+    beego.GlobalControllerRouter["gitlab.com/fankaljead/my-tour/my-tour-server/controllers:TravelNoteController"] = append(beego.GlobalControllerRouter["gitlab.com/fankaljead/my-tour/my-tour-server/controllers:TravelNoteController"],
+        beego.ControllerComments{
+            Method: "Get",
+            Router: `/:travel_note_id`,
+            AllowHTTPMethods: []string{"get"},
+            MethodParams: param.Make(),
+            Filters: nil,
+            Params: nil})
+
+    beego.GlobalControllerRouter["gitlab.com/fankaljead/my-tour/my-tour-server/controllers:TravelNoteController"] = append(beego.GlobalControllerRouter["gitlab.com/fankaljead/my-tour/my-tour-server/controllers:TravelNoteController"],
+        beego.ControllerComments{
+            Method: "GetAllTravelNoteInfo",
+            Router: `/getAllTravelNoteInfo`,
+            AllowHTTPMethods: []string{"get"},
+            MethodParams: param.Make(),
+            Filters: nil,
+            Params: nil})
+
+    beego.GlobalControllerRouter["gitlab.com/fankaljead/my-tour/my-tour-server/controllers:TravelNoteController"] = append(beego.GlobalControllerRouter["gitlab.com/fankaljead/my-tour/my-tour-server/controllers:TravelNoteController"],
+        beego.ControllerComments{
+            Method: "PublishTravelNoteDraft",
+            Router: `/publishTravelNote`,
+            AllowHTTPMethods: []string{"post"},
+            MethodParams: param.Make(),
+            Filters: nil,
+            Params: nil})
+
+    beego.GlobalControllerRouter["gitlab.com/fankaljead/my-tour/my-tour-server/controllers:TravelNoteController"] = append(beego.GlobalControllerRouter["gitlab.com/fankaljead/my-tour/my-tour-server/controllers:TravelNoteController"],
+        beego.ControllerComments{
+            Method: "SetTravelNoteDraft",
+            Router: `/setTravelNoteDraft`,
+            AllowHTTPMethods: []string{"post"},
+            MethodParams: param.Make(),
+            Filters: nil,
+            Params: nil})
+
     beego.GlobalControllerRouter["gitlab.com/fankaljead/my-tour/my-tour-server/controllers:UserController"] = append(beego.GlobalControllerRouter["gitlab.com/fankaljead/my-tour/my-tour-server/controllers:UserController"],
         beego.ControllerComments{
             Method: "Post",

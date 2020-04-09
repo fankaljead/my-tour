@@ -183,3 +183,11 @@ func (u *UserController) Logout() {
 
 	u.ServeJSON()
 }
+
+func GetCurrentSessionUserIdInt64() int64 {
+	return 1
+}
+
+func GetCurrentSessionUserIdString() string {
+	return "1"
+}

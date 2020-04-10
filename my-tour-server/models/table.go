@@ -1,6 +1,8 @@
 package models
 
-import "github.com/astaxie/beego/orm"
+import (
+	"github.com/astaxie/beego/orm"
+)
 
 type DatabaseTable struct {
 	Id        int64  `json:"id"`
@@ -10,7 +12,7 @@ type DatabaseTable struct {
 func init() {
 	orm.RegisterModel(new(DatabaseTable))
 	AddATable("database_table")
-	AutoCreateTabel()
+	// AutoCreateTabel()
 }
 
 func AddTable(table_name string) (int64, error) {

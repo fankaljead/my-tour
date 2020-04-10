@@ -1,6 +1,7 @@
 package main
 
 import (
+	"gitlab.com/fankaljead/my-tour/my-tour-server/models"
 	_ "gitlab.com/fankaljead/my-tour/my-tour-server/routers"
 
 	"github.com/astaxie/beego"
@@ -24,6 +25,7 @@ func main() {
 	if beego.BConfig.RunMode == "dev" {
 		beego.BConfig.WebConfig.DirectoryIndex = true
 		beego.BConfig.WebConfig.StaticDir["/swagger"] = "swagger"
+		models.AutoCreateTabel()
 	}
 	beego.Run()
 }

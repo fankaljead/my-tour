@@ -378,6 +378,17 @@ paths:
           description: '{objec} models.ScenarySpot'
         "403":
           description: body is empty
+  /table/:
+    post:
+      tags:
+      - table
+      description: create table
+      operationId: TableController.CreateTable
+      responses:
+        "200":
+          description: '{int}'
+        "403":
+          description: body is empty
   /travel_note/:
     post:
       tags:

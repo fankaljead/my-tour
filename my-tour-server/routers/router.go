@@ -50,6 +50,11 @@ func init() {
 				&controllers.ScenarySpotController{},
 			),
 		),
+		beego.NSNamespace("/table",
+			beego.NSInclude(
+				&controllers.TableController{},
+			),
+		),
 	)
 	beego.AddNamespace(ns)
 }

@@ -11,13 +11,13 @@ import (
 func init() {
 	sqlDriver := beego.AppConfig.String("sqlDriver")
 	sqlconn := beego.AppConfig.String("sqlconn")
-
-	orm.RegisterDriver(sqlDriver, orm.DRMySQL)
-	orm.RegisterDataBase("default", sqlDriver, sqlconn, 30)
-	// create table
 	name := "default"
 	force := false
 	verbose := true
+
+	orm.RegisterDriver(sqlDriver, orm.DRMySQL)
+	orm.RegisterDataBase(name, sqlDriver, sqlconn, 30)
+	// create table
 	orm.RunSyncdb(name, force, verbose)
 }
 func main() {

@@ -15,6 +15,7 @@ type Fan struct {
 
 func init() {
 	orm.RegisterModel(new(Fan))
+	AddATable("fan")
 }
 
 func FollowUser(user_id int64, follow_id int64) (int64, error) {

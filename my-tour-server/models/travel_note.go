@@ -20,15 +20,17 @@ type TravelNote struct {
 }
 
 type TravelNoteTopic struct {
-	Id           int64
-	CreateUserId int64
-	Name         string
-	Description  string
-	CreateTime   string
+	Id           int64  `json:"id"`
+	CreateUserId int64  `json:"create_user_id"`
+	Name         string `json:"name"`
+	Description  string `json:"description"`
+	CreateTime   string `json:"create_time"`
 }
 
 func init() {
-	orm.RegisterModel(new(TravelNote))
+	orm.RegisterModel(new(TravelNote), new(TravelNoteTopic))
+	AddATable("travel_note")
+	AddATable("travel_note_topic")
 }
 
 func AddTravelNote(title string, content string, cover string,

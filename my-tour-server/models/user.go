@@ -23,6 +23,8 @@ func init() {
 	orm.RegisterModel(new(User))
 	// create table
 	// orm.RunSyncdb("default", true, true)
+
+	AddATable("user")
 }
 
 type User struct {

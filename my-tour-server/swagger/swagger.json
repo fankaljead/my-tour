@@ -1178,42 +1178,42 @@
             "title": "UserInfo",
             "type": "object",
             "properties": {
-                "BackgroundImage": {
-                    "type": "string"
-                },
-                "Birthday": {
-                    "type": "string"
-                },
-                "Email": {
-                    "type": "string"
-                },
-                "HeadIcon": {
-                    "type": "string"
-                },
                 "Id": {
                     "type": "integer",
                     "format": "int64"
                 },
-                "Location": {
+                "background_image": {
                     "type": "string"
                 },
-                "PersonalizedSignature": {
+                "birthday": {
                     "type": "string"
                 },
-                "Qq": {
+                "email": {
                     "type": "string"
                 },
-                "Tel": {
+                "head_icon": {
                     "type": "string"
                 },
-                "UpdateTime": {
+                "location": {
                     "type": "string"
                 },
-                "UserId": {
+                "personalized_signature": {
+                    "type": "string"
+                },
+                "qq": {
+                    "type": "string"
+                },
+                "tel": {
+                    "type": "string"
+                },
+                "update_time": {
+                    "type": "string"
+                },
+                "user_id": {
                     "type": "integer",
                     "format": "int64"
                 },
-                "Wechat": {
+                "wechat": {
                     "type": "string"
                 }
             }

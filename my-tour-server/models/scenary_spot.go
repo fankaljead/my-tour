@@ -29,6 +29,8 @@ type ScenarySpotCatagory struct {
 
 func init() {
 	orm.RegisterModel(new(ScenarySpot), new(ScenarySpotCatagory))
+	AddATable("scenary_spot")
+	AddATable("scenary_spot_catagory")
 }
 
 func AddScenarySpot(name, short_name, location, description, background string,

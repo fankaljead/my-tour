@@ -21,6 +21,9 @@ func init() {
 	orm.RegisterModel(new(UserHobby), new(Hobby))
 	// create table
 	// orm.RunSyncdb("default", false, true)
+
+	AddATable("hobby")
+	AddATable("user_hobby")
 }
 func AddHobby(title string) int64 {
 	o := orm.NewOrm()

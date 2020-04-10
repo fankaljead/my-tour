@@ -17,21 +17,23 @@ func init() {
 	orm.RegisterModel(new(UserInfo))
 	// create table
 	// orm.RunSyncdb("default", true, true)
+
+	AddATable("user_info")
 }
 
 type UserInfo struct {
-	Id                    int64 `form:"-"` //`orm:"pk"`
-	UserId                int64
-	Tel                   string
-	Birthday              string
-	HeadIcon              string
-	Qq                    string
-	Email                 string
-	Location              string
-	PersonalizedSignature string
-	BackgroundImage       string
-	Wechat                string
-	UpdateTime            string
+	Id                    int64  `form:"-"` //`orm:"pk"`
+	UserId                int64  `json:"user_id"`
+	Tel                   string `json:"tel"`
+	Birthday              string `json:"birthday"`
+	HeadIcon              string `json:"head_icon"`
+	Qq                    string `json:"qq"`
+	Email                 string `json:"email"`
+	Location              string `json:"location"`
+	PersonalizedSignature string `json:"personalized_signature"`
+	BackgroundImage       string `json:"background_image"`
+	Wechat                string `json:"wechat"`
+	UpdateTime            string `json:"update_time"`
 }
 
 func UpdateUserInfo(user_info *UserInfo) int64 {

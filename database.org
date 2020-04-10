@@ -60,6 +60,12 @@
    - 编辑时间 edit_time
    - 类别 scenary_spot_catagory_id
    - 评分 score
+** 景点类别 scenary_spot_catagory
+   - 编号 id
+   - 名称 name
+   - 描述 description
+   - 创建时间 create_time
+   - 创建人 create_user_id
 ** 景点点评 scenary_spot_comment
   - 编号 id
   - 标题 title
@@ -69,26 +75,28 @@
   - 景点编号 scenary_spot_id
   - 赞数 star_number
   - 评分 score
-** 景点评论
-   - 编号
-   - 用户
-   - 内容
-   - 点赞数
-   - 创建时间
-** 景点类别 scenary_spot_catagory
-   - 编号 id
-   - 名称 name
-   - 描述 description
-   - 创建时间 create_time
-   - 创建人 create_user_id
+# ** 景点评论
+#    - 编号 id
+#    - 用户编号 user_id
+#    - 内容 content
+#    - 点赞数
+#    - 创建时间 create_time
 ** 个人游 self_tour
    - 编号 id
    - 名称 name
    - 描述 description
+   - 内容 content
    - 封面 cover
    - 创建人 create_user_id
    - 创建时间 create_time
-   - 点赞数 star
+** 赞
+   - 编号 id
+   - 点赞类型 star_type
+   - 点赞人编号 star_user_id
+   - 时间 create_time
+** 赞类型
+   - 编号 id
+   - 类型表 type_table_name
 ** 个人游日程 self_tour_days
    - 编号 id
    - 标题 title
@@ -204,3 +212,6 @@
    - 标题 title
    - 内容 content
    - 创建时间 create_time
+** 数据库表 database_table
+   - 编号 id
+   - 表名 table_name

@@ -284,6 +284,305 @@
                 }
             }
         },
+        "/scenary_spot/addScenarySpot": {
+            "post": {
+                "tags": [
+                    "scenary_spot"
+                ],
+                "description": "update scenary spot",
+                "operationId": "ScenarySpotController.UpdateScenarySpot",
+                "parameters": [
+                    {
+                        "in": "int64",
+                        "name": "scenary_spot_id",
+                        "description": "The spot scenary_spot_id",
+                        "schema": {
+                            "$ref": "#/definitions/true"
+                        }
+                    },
+                    {
+                        "in": "sting",
+                        "name": "name",
+                        "description": "The spot name",
+                        "schema": {
+                            "$ref": "#/definitions/true"
+                        }
+                    },
+                    {
+                        "in": "sting",
+                        "name": "short_name",
+                        "description": "The spot short_name",
+                        "schema": {
+                            "$ref": "#/definitions/true"
+                        }
+                    },
+                    {
+                        "in": "sting",
+                        "name": "location",
+                        "description": "The spot location",
+                        "schema": {
+                            "$ref": "#/definitions/true"
+                        }
+                    },
+                    {
+                        "in": "sting",
+                        "name": "description",
+                        "description": "The spot description",
+                        "schema": {
+                            "$ref": "#/definitions/true"
+                        }
+                    },
+                    {
+                        "in": "int64",
+                        "name": "scenary_spot_catagory_id",
+                        "description": "The spot scenary_spot_catagory_id",
+                        "schema": {
+                            "$ref": "#/definitions/true"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{string} models.ScenarySpot.Id"
+                    },
+                    "403": {
+                        "description": "body is empty"
+                    }
+                }
+            }
+        },
+        "/scenary_spot/addScenarySpotCatagory": {
+            "post": {
+                "tags": [
+                    "scenary_spot"
+                ],
+                "description": "create object",
+                "operationId": "ScenarySpotController.CreateAScenarySpotCatagory",
+                "parameters": [
+                    {
+                        "in": "sting",
+                        "name": "name",
+                        "description": "The spot name",
+                        "schema": {
+                            "$ref": "#/definitions/true"
+                        }
+                    },
+                    {
+                        "in": "sting",
+                        "name": "description",
+                        "description": "The spot description",
+                        "schema": {
+                            "$ref": "#/definitions/true"
+                        }
+                    },
+                    {
+                        "in": "int64",
+                        "name": "create_user_id",
+                        "description": "The spot create_user_id",
+                        "schema": {
+                            "$ref": "#/definitions/true"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{string} models.ScenarySpotCatagory.Id"
+                    },
+                    "403": {
+                        "description": "body is empty"
+                    }
+                }
+            }
+        },
+        "/scenary_spot/deleteScenarySpot": {
+            "delete": {
+                "tags": [
+                    "scenary_spot"
+                ],
+                "description": "delete scenary spot",
+                "operationId": "ScenarySpotController.DeleteScenarySpot",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "scenary_spot_id",
+                        "description": "The scenary spot you want to delete",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{int} models.ScenarySpot.Id"
+                    },
+                    "403": {
+                        "description": "body is empty"
+                    }
+                }
+            }
+        },
+        "/scenary_spot/deleteScenarySpotCatagory": {
+            "delete": {
+                "tags": [
+                    "scenary_spot"
+                ],
+                "description": "delete scenary spot catagory",
+                "operationId": "ScenarySpotController.DeleteScenarySpotCatagory",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "scenary_spot_catagory_id",
+                        "description": "The scenary spot catagory you want to delete",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{int} models.ScenarySpotCatagory.Id"
+                    },
+                    "403": {
+                        "description": "body is empty"
+                    }
+                }
+            }
+        },
+        "/scenary_spot/getScenarySpot": {
+            "get": {
+                "tags": [
+                    "scenary_spot"
+                ],
+                "description": "get scenary spot",
+                "operationId": "ScenarySpotController.GetScenarySpot",
+                "parameters": [
+                    {
+                        "in": "int64",
+                        "name": "scenary_spot_id",
+                        "description": "The scenary spot id",
+                        "schema": {
+                            "$ref": "#/definitions/true"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/models.ScenarySpot"
+                        }
+                    },
+                    "403": {
+                        "description": "body is empty"
+                    }
+                }
+            }
+        },
+        "/scenary_spot/getScenarySpotCatagory": {
+            "get": {
+                "tags": [
+                    "scenary_spot"
+                ],
+                "description": "get scenary spot catagory",
+                "operationId": "ScenarySpotController.GetScenarySpotCatagory",
+                "parameters": [
+                    {
+                        "in": "int64",
+                        "name": "pase_size",
+                        "description": "The page size",
+                        "schema": {
+                            "$ref": "#/definitions/true"
+                        }
+                    },
+                    {
+                        "in": "int64",
+                        "name": "page_index",
+                        "description": "The page index",
+                        "schema": {
+                            "$ref": "#/definitions/true"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{string} models.ScenarySpotCatagory"
+                    },
+                    "403": {
+                        "description": "body is empty"
+                    }
+                }
+            }
+        },
+        "/scenary_spot/getScenarySpots": {
+            "get": {
+                "tags": [
+                    "scenary_spot"
+                ],
+                "description": "get scenary spots",
+                "operationId": "ScenarySpotController.GetScenarySpots",
+                "parameters": [
+                    {
+                        "in": "int64",
+                        "name": "pase_size",
+                        "description": "The page size",
+                        "schema": {
+                            "$ref": "#/definitions/true"
+                        }
+                    },
+                    {
+                        "in": "int64",
+                        "name": "page_index",
+                        "description": "The page index",
+                        "schema": {
+                            "$ref": "#/definitions/true"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{string} models.ScenarySpot"
+                    },
+                    "403": {
+                        "description": "body is empty"
+                    }
+                }
+            }
+        },
+        "/scenary_spot/getScenarySpotsShortInfo": {
+            "get": {
+                "tags": [
+                    "scenary_spot"
+                ],
+                "description": "get scenary spots short info",
+                "operationId": "ScenarySpotController.GetScenarySpotsShortInfo",
+                "parameters": [
+                    {
+                        "in": "int64",
+                        "name": "pase_size",
+                        "description": "The page size",
+                        "schema": {
+                            "$ref": "#/definitions/true"
+                        }
+                    },
+                    {
+                        "in": "int64",
+                        "name": "page_index",
+                        "description": "The page index",
+                        "schema": {
+                            "$ref": "#/definitions/true"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{objec} models.ScenarySpot"
+                    },
+                    "403": {
+                        "description": "body is empty"
+                    }
+                }
+            }
+        },
         "/travel_note/": {
             "post": {
                 "tags": [
@@ -781,6 +1080,42 @@
                 "Score": {
                     "type": "integer",
                     "format": "int64"
+                }
+            }
+        },
+        "models.ScenarySpot": {
+            "title": "ScenarySpot",
+            "type": "object",
+            "properties": {
+                "background": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "editTime": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "location": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "scenary_spot_catagory_id": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "score": {
+                    "type": "number",
+                    "format": "double"
+                },
+                "shortName": {
+                    "type": "string"
                 }
             }
         },

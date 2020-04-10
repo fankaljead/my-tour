@@ -45,6 +45,11 @@ func init() {
 				&controllers.TravelNoteController{},
 			),
 		),
+		beego.NSNamespace("/scenary_spot",
+			beego.NSInclude(
+				&controllers.ScenarySpotController{},
+			),
+		),
 	)
 	beego.AddNamespace(ns)
 }

@@ -15,7 +15,10 @@ func init() {
 	orm.RegisterDriver(sqlDriver, orm.DRMySQL)
 	orm.RegisterDataBase("default", sqlDriver, sqlconn, 30)
 	// create table
-	// orm.RunSyncdb("default", true, true)
+	name := "default"
+	force := false
+	verbose := true
+	orm.RunSyncdb(name, force, verbose)
 }
 func main() {
 	if beego.BConfig.RunMode == "dev" {

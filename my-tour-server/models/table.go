@@ -28,16 +28,18 @@ func AddTable(table_name string) (int64, error) {
 func AutoCreateTabel() (successNums int64, err error) {
 	var tables []DatabaseTable
 
+	o := orm.NewOrm()
+
+	// o.Raw("drop table database_table")
+
+	// successNums, err = o.InsertMulti(len(tables), tables)
 	for _, name := range table_names {
 		table := DatabaseTable{
 			TableName: name,
 		}
+		o.ReadOrCreate(&table, "table_name")
 		tables = append(tables, table)
 	}
-
-	o := orm.NewOrm()
-
-	successNums, err = o.InsertMulti(len(tables), tables)
 	return
 }
 

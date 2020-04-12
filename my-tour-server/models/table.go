@@ -45,6 +45,10 @@ func AutoCreateTabel() (successNums int64, err error) {
 
 var table_names []string
 
-func AddATable(table_name string) {
-	table_names = append(table_names, table_name)
+func AddATable(table_name ...string) {
+
+	for _, t := range table_name {
+		table_names = append(table_names, t)
+	}
+
 }

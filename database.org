@@ -134,12 +134,16 @@
   - 赞数 star_number
 ** 用户私信 user_message
    - 编号 id
-   - 类型 type
+   - 类型编号 type_id
    - 内容 content
    - 发送者 sender
    - 接受者 receiver
    - 是否已接收 is_receive
    - 发送时间 send_time
+** 用户私信类型 user_message_type
+   - 编号 id
+   - 名字 name
+   - 创建时间 create_time
 ** 交通方式 transport_way
    - 编号 id
    - 名称 name
@@ -154,7 +158,8 @@
    - 交通方式 transport_way_id
    - 个人的想法 personal_thought
    - 创建人 create_user_id
-** 照片 photos
+   - 创建时间 create_time
+** 照片 photo
    - 编号 id
    - 类型 type
    - 地址 src
@@ -176,18 +181,19 @@
    - 创建者 create_user_id
    - 创建时间 create_time
    - 草稿 draft
-** 问答回答 q_and_a_answers
+** 问答回答 q_and_a_answer
    - 编号 id
    - 问题 question_id
    - 回答者 answer_user_id
    - 内容 content
+   - 创建时间 create_time
    - 赞数 star_number
-** 问答回答评论 q_and_a_answers_comment
+** 问答回答评论 q_and_a_answer_comment
    - 编号 id
    - 回答编号 answer_id
    - 内容 content
-   - 问答回答评论编号 q_and_a_answers_comment_id
-   - 评论时间 comment_time
+   - 问答回答评论编号 q_and_a_answer_comment_id
+   - 创建时间 create_time
    - 赞数 star_number
    - 评论者 comment_user_id
 ** 标签 tag
@@ -209,8 +215,7 @@
    - 登录时间 login_time
 ** 过滤词 sensive_word
    - 编号 id
-   - 标题 title
-   - 内容 content
+   - 关键字 key_word
    - 创建时间 create_time
 ** 数据库表 database_table
    - 编号 id

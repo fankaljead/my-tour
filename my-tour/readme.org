@@ -1,0 +1,19 @@
+* my-tour
+** Project setup
+#+BEGIN_SRC shell
+npm install
+#+END_SRC
+*** Compiles and hot-reloads for development
+#+BEGIN_SRC shell
+npm run serve 
+#+END_SRC
+*** Compiles and minifies for production
+#+BEGIN_SRC shell
+npm run build
+#+END_SRC
+*** Lints and fixes files
+#+BEGIN_SRC shell
+npm run lint 
+#+END_SRC
+*** Customize configuration
+See[[https://cli.vuejs.org/config/][ Configuration Reference]] 

@@ -1,13 +1,32 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
+import Login from '../views/Login'
+import ForgetPassword from '../views/ForgetPassword'
+import Register from '../views/Register'
+
 
 Vue.use(VueRouter)
 
 const routes = [{
         path: '/',
+        name: 'login',
+        component: Login
+    },
+    {
+        path: '/home',
         name: 'Home',
         component: Home
+    },
+    {
+        path: '/forget_password',
+        name: 'forget_pasword',
+        component: ForgetPassword
+    },
+    {
+        path: '/register',
+        name: 'register',
+        component: Register
     },
     {
         path: '/about',
@@ -25,7 +44,8 @@ const routes = [{
 ]
 
 const router = new VueRouter({
-    routes
+    routes,
+    mode: 'history',
 })
 
 export default router

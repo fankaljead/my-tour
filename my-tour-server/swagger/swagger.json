@@ -1179,14 +1179,14 @@
             "title": "User",
             "type": "object",
             "properties": {
-                "Id": {
+                "id": {
                     "type": "integer",
                     "format": "int64"
                 },
-                "Password": {
+                "password": {
                     "type": "string"
                 },
-                "Username": {
+                "username": {
                     "type": "string"
                 }
             }

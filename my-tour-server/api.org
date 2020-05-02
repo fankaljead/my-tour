@@ -1,0 +1,33 @@
+* 接口字典
+  baseURL = http://localhost:8080/v1
+** User /user
+   
+   - get 获取所有用户
+     #+BEGIN_SRC json
+       {
+         "length": 4,
+         "users": [
+           {
+             "id": 1,
+             "username": "curry",
+             "password": "30"
+           },
+           {
+             "id": 2,
+             "username": "harden",
+             "password": "13"
+           },
+           {
+             "id": 3,
+             "username": "zhou",
+             "password": "21"
+           },
+           {
+             "id": 4,
+             "username": "james",
+             "password": "30"
+           }
+         ]
+       }
+    #+END_SRC
+

@@ -28,9 +28,9 @@ func init() {
 }
 
 type User struct {
-	Id       int64  `form:"-"` //`orm:"pk"`
-	Username string `form:"username"`
-	Password string `form:"password"`
+	Id       int64  `form:"-" json:"id"`
+	Username string `form:"username" json:"username"`
+	Password string `form:"password" json:"password"`
 	// Id       int64
 	// Username string
 	// Password string

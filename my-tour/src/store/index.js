@@ -14,25 +14,31 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
     state: {
-        name: '',
+        username: '',
         uid: 0,
     },
     mutations: {
         [LOGIN](state, payload) {
-            state.name = payload.name
+            state.username = payload.username
             state.uid = payload.uid
+            console.log("mutations payload: ", payload);
         }
     },
     actions: {
         [LOGIN](context, payload) {
+            console.log(payload)
             request({
-                url: '/user/login',
+                url: 'user/login',
                 username: payload.username,
                 password: payload.username
             }).then(res => {
-                console.log("res: ", res);
+                console.log("actions res: ", res.data);
+                context.commit(LOGIN, {
+                    username: payload.username,
+                    uid: res.data
+                })
+                payload.call()
             })
-            context.commit(LOGIN, payload)
         }
     },
     modules: {}

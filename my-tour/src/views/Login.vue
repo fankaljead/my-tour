@@ -1,10 +1,10 @@
 <template>
-  <div>
-    <van-nav-bar title="登录" />
+  <div id="login">
+    <van-nav-bar title="登录后更精彩" />
     <van-form @submit="onSubmit">
       <van-field
         v-model="username"
-        name="用户名"
+        name="username"
         label="用户名"
         placeholder="用户名"
         :rules="[{ required: true, message: '请填写用户名' }]"
@@ -12,7 +12,7 @@
       <van-field
         v-model="password"
         type="password"
-        name="密码"
+        name="password"
         label="密码"
         placeholder="密码"
         :rules="[{ required: true, message: '请填写密码' }]"
@@ -51,6 +51,9 @@ import { NavBar } from "vant";
 import { Col, Row } from "vant";
 
 import { LOGIN } from "../store/mutation-types.js";
+import { Toast } from 'vant';
+
+Vue.use(Toast);
 
 Vue.use(Col);
 Vue.use(Row);
@@ -69,10 +72,35 @@ export default {
   },
   methods: {
     onSubmit(values) {
-      this.$store.dispatch(LOGIN, values);
+      console.log(values);
+      const s = this;
+      this.$store.dispatch(LOGIN, {
+        ...values,
+        call() {
+          console.log("uid: " + s.$store.state.uid);
+          if (s.$store.state.uid != 0) {
+            Toast.success('登录成功');
+            s.$router.replace("/home");
+          }
+        }
+      })
+
+      // this.$store.dispatch(LOGIN, values, () => {
+      //   console.log("uid: " + this.$store.state.uid);
+      //   if (this.$store.state.uid != 0) {
+      //     this.$router.replace("/home");
+      //   }
+      // });
     }
   }
 };
 </script>
 
-<style></style>
+<style>
+ #login {
+   margin-top: 20%;
+ }
+ body{
+   /* background: url('../assets/background.jpg') */
+ }
+</style>

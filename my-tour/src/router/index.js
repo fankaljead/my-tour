@@ -4,6 +4,11 @@ import Home from '../views/Home.vue'
 import Login from '../views/Login'
 import ForgetPassword from '../views/ForgetPassword'
 import Register from '../views/Register'
+import HomePage from '../views/HomePage'
+import Subscribe from '../views/Subscribe'
+import Add from '../views/Add'
+import Message from '../views/Message'
+import PersonCenter from '../views/PersonCenter'
 
 
 Vue.use(VueRouter)
@@ -15,8 +20,33 @@ const routes = [{
     },
     {
         path: '/home',
-        name: 'Home',
-        component: Home
+        // name: 'Home',
+        component: Home,
+        children: [{
+                path: '',
+                component: HomePage
+            },
+            {
+                path: '/subscribe',
+                name: 'subscribe',
+                component: Subscribe
+            },
+            {
+                path: '/add',
+                name: 'add',
+                component: Add
+            },
+            {
+                path: '/message',
+                name: 'message',
+                component: Message
+            },
+            {
+                path: '/personcenter',
+                name: 'personcenter',
+                component: PersonCenter
+            },
+        ]
     },
     {
         path: '/forget_password',

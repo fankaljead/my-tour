@@ -5,7 +5,8 @@ import {
 } from '../../nework/request.js'
 
 import {
-    LOGIN
+    LOGIN,
+    REGISTER
 } from '../mutation-types.js'
 
 const state = () => ({
@@ -34,6 +35,26 @@ const actions = {
             })
             payload.call()
         })
+    },
+
+    [REGISTER](context, payload) {
+        console.log("action register")
+        console.log(payload)
+        request({
+            url: 'user',
+            method: 'post',
+            params: {
+                username: payload.username,
+                password: payload.password
+            }
+        }).then(res => {
+            console.log("actions res: ", res.data);
+            context.commit(REGISTER, {
+                username: payload.username,
+                uid: res.data.uid
+            })
+            payload.call()
+        })
     }
 }
 
@@ -43,6 +64,10 @@ const mutations = {
         state.username = payload.username
         state.uid = payload.uid
         console.log("mutations payload: ", payload);
+    },
+    [REGISTER](state, payload) {
+        state.username = payload.username
+        state.uid = payload.uid
     }
 }
 

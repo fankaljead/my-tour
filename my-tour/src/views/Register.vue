@@ -4,7 +4,7 @@
     <van-form @submit="onSubmit">
       <van-field
         v-model="username"
-        name="用户名"
+        name="username"
         label="用户名"
         placeholder="用户名"
         :rules="[{ required: true, message: '请填写用户名' }]"
@@ -12,7 +12,7 @@
       <van-field
         v-model="password"
         type="password"
-        name="密码"
+        name="password"
         label="密码"
         placeholder="密码"
         :rules="[{ required: true, message: '请填写密码' }]"
@@ -32,6 +32,8 @@ import Vue from "vue";
 import { Button, Form, Field } from "vant";
 import { NavBar } from "vant";
 
+import { REGISTER } from "../store/mutation-types.js";
+
 Vue.use(NavBar);
 Vue.use(Form);
 Vue.use(Field);
@@ -47,10 +49,22 @@ export default {
   },
   methods: {
     onSubmit(values) {
-      console.log(values)
+      console.log(values);
+      const s = this;
+      this.$store.dispatch(REGISTER, {
+        ...values,
+        call() {
+          console.log("uid: " + s.$store.state.user.uid);
+          if (s.$store.state.user.uid > 0) {
+            s.$toast.success("注册成功！");
+            s.$router.replace("/home");
+          }
+        }
+      });
     },
     onClickLeft() {
       this.$router.replace("/");
+      // this.$router.pop()
     }
   }
 };

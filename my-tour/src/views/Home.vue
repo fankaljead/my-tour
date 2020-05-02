@@ -1,16 +1,18 @@
 <template>
   <div class="home">
-    This Home Page
+    <Nav />
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
 
+import Nav from '../components/Nav'
 
 export default {
   name: "Home",
   components: {
+    Nav
   }
 };
 </script>

@@ -80,7 +80,7 @@ export default {
           console.log("uid: " + s.$store.state.user.uid);
           if (s.$store.state.user.uid > 0) {
             s.$toast.success("登录成功");
-            s.$router.push("/home");
+            s.$router.replace("/home");
           } else if (s.$store.state.user.uid == 0) {
             s.$toast.fail("用户不存在");
           } else if (s.$store.state.user.uid == -1) {

@@ -51,7 +51,7 @@ import { NavBar } from "vant";
 import { Col, Row } from "vant";
 
 import { LOGIN } from "../store/mutation-types.js";
-import { Toast } from 'vant';
+import { Toast } from "vant";
 
 Vue.use(Toast);
 
@@ -77,13 +77,17 @@ export default {
       this.$store.dispatch(LOGIN, {
         ...values,
         call() {
-          console.log("uid: " + s.$store.state.uid);
-          if (s.$store.state.uid != 0) {
-            Toast.success('登录成功');
-            s.$router.replace("/home");
+          console.log("uid: " + s.$store.state.user.uid);
+          if (s.$store.state.user.uid > 0) {
+            s.$toast.success("登录成功");
+            s.$router.push("/home");
+          } else if (s.$store.state.user.uid == 0) {
+            s.$toast.fail("用户不存在");
+          } else if (s.$store.state.user.uid == -1) {
+            s.$toast.fail("密码错误");
           }
         }
-      })
+      });
 
       // this.$store.dispatch(LOGIN, values, () => {
       //   console.log("uid: " + this.$store.state.uid);
@@ -96,11 +100,4 @@ export default {
 };
 </script>
 
-<style>
- #login {
-   margin-top: 20%;
- }
- body{
-   /* background: url('../assets/background.jpg') */
- }
-</style>
+<style></style>

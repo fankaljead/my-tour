@@ -46,7 +46,9 @@ export default {
     };
   },
   methods: {
-    onSubmit() {},
+    onSubmit(values) {
+      console.log(values)
+    },
     onClickLeft() {
       this.$router.replace("/");
     }

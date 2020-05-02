@@ -1,6 +1,7 @@
 package models
 
 import (
+	"fmt"
 	"strconv"
 
 	"github.com/astaxie/beego/orm"
@@ -71,6 +72,10 @@ func Login(username, password string) int64 {
 
 	var user User
 	err := o.Raw("SELECT id, password FROM user WHERE username = ?", username).QueryRow(&user)
+	fmt.Println("----login method----")
+	fmt.Println(username)
+	fmt.Println(password)
+	fmt.Println(user)
 
 	if err != nil {
 		return LOGIN_USER_NOT_EXIST

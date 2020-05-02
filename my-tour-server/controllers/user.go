@@ -158,11 +158,7 @@ func (u *UserController) Login() {
 	sess, _ := GlobalSessions.SessionStart(w, r)
 	defer sess.SessionRelease(w)
 
-	fmt.Println("Login in ")
-	fmt.Println(username)
 	user_id := models.Login(username, password)
-	fmt.Println("user_id")
-	fmt.Println(user_id)
 	u.Data["json"] = user_id
 
 	sess.Set("user_id", user_id)

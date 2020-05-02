@@ -9,11 +9,11 @@ import (
 
 const (
 	// 登录成功
-	LOGIN_SUCCESS = iota
+	LOGIN_SUCCESS = 1
 	// 登录失败 用户不存在
-	LOGIN_USER_NOT_EXIST
+	LOGIN_USER_NOT_EXIST = 0
 	// 登录失败 密码错误
-	LOGIN_PASSWORD_NOT_MATCH
+	LOGIN_PASSWORD_NOT_MATCH = -1
 )
 
 func init() {

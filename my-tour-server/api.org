@@ -1,33 +1,66 @@
-* 接口字典
-  baseURL = http://localhost:8080/v1
-** User /user
-   
-   - get 获取所有用户
-     #+BEGIN_SRC json
-       {
-         "length": 4,
-         "users": [
-           {
-             "id": 1,
-             "username": "curry",
-             "password": "30"
-           },
-           {
-             "id": 2,
-             "username": "harden",
-             "password": "13"
-           },
-           {
-             "id": 3,
-             "username": "zhou",
-             "password": "21"
-           },
-           {
-             "id": 4,
-             "username": "james",
-             "password": "30"
-           }
-         ]
-       }
-    #+END_SRC
+* 接口字典                                                              :TOC:
+  - [[#user][User]]
 
+** User 
+   - 获取所有用户
+     - /user
+     - method: get
+       #+BEGIN_SRC json
+         {
+           "length": 4,
+           "users": [
+             {
+               "id": 1,
+               "username": "curry",
+               "password": "30"
+             },
+             {
+               "id": 2,
+               "username": "harden",
+               "password": "13"
+             },
+             {
+               "id": 3,
+               "username": "zhou",
+               "password": "21"
+             },
+             {
+               "id": 4,
+               "username": "james",
+               "password": "30"
+             }
+           ]
+         }
+      #+END_SRC
+   - 登录
+     - /user/login
+     - method: get
+     - params: username, password
+     - return:
+      |   0 | 用户不存在 |
+      | >=1 | 用户 id    |
+      |  -1 | 密码错误   |
+   - 用户注册
+     - /user
+     - method: post
+     - params: username, password
+     - return: user_id
+   - 获取用户信息
+     - /user/:uid
+     - method: get
+     - params: uid
+     - return: user
+   - 修改用户信息
+     - /user/:uid
+     - method: put
+     - params: uid, user
+     - return: 1 0
+   - 删除用户
+     - /user/:uid
+     - method: delete
+     - params: uid
+     - return: 1 0
+   - 退出登录
+     - /user/logout
+     - method: get
+     - return 1 0

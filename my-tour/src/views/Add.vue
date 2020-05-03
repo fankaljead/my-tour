@@ -1,12 +1,23 @@
 <template>
   <div>
-    This is add page
+    <AddPopMenu /> 
   </div>
 </template>
 
 <script>
+
+import AddPopMenu from '../components/add/AddPopMenu'
+
 export default {
-  name: 'Add'
+  name: 'Add',
+  components: {
+    AddPopMenu
+  },
+  data() {
+    return {
+      show: true,
+    }
+  }
 }
 </script>
 

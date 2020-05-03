@@ -24,17 +24,19 @@ func (u *TravelNoteController) Post() {
 
 	title := u.GetString("title")
 	content := u.GetString("content")
+	longitude := u.GetString("longitude")
+	latitude := u.GetString("latitude")
 	cover := u.GetString("cover")
 	place := u.GetString("place")
 	publishTime := u.GetString("publishTime")
 
-	id, _ := models.AddTravelNote(title, content, cover, place, user_id, publishTime)
+	id, _ := models.AddTravelNote(title, content, cover, place, user_id, longitude, latitude, publishTime)
 	u.Data["json"] = id
 
 	u.ServeJSON()
 }
 
-// @Title AddTravelNote
+// @Title UpdateTravelNote
 // @Description  add travel note
 // @Param	title path 	string	true
 // @Param	content path 	string	true
@@ -137,6 +139,28 @@ func (u *TravelNoteController) PublishTravelNoteDraft() {
 	travel_note_id, _ := u.GetInt64("travel_note_id")
 
 	u.Data["json"] = models.PublishTravelNoteDraft(travel_note_id)
+
+	u.ServeJSON()
+}
+
+// @Title AddTravelRoutine
+// @Description  add travel note 新增旅游路线
+// @Param	title path 	string	true
+// @Param	content path 	string	true
+// @Param	cover path 	string	true
+// @Param	publishTime path 	string	true
+// @Success 200 {int} models.TravelNote.Id
+// @Failure 403 body is empty
+// @router /add_travel_routine [post]
+func (u *TravelNoteController) AddTravelRoutine() {
+	// user_id := int64(1)
+	user_id := GetCurrentSessionUserIdInt64()
+
+	name := u.GetString("title")
+	description := u.GetString("content")
+
+	id, _ := models.AddTravelRoutine(name, description, user_id)
+	u.Data["json"] = id
 
 	u.ServeJSON()
 }

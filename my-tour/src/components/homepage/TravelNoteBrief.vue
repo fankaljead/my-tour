@@ -1,40 +1,20 @@
 <template>
-  <div>
-    <div class="travel_note_left">
-      <!-- <img alt="" v-bind:src="data.img" /> -->
-      <van-image
-        width="15rem"
-        height="15rem"
-        fit="contain"
-        v-bind:src="data.img"
-      >
-      </van-image>
-    </div>
-    <div class="travel_note_right">
-      <div>
-        <h2>{{ data.title }}</h2>
-        <p>
-          {{ data.intro }}
-        </p>
-        <p>
-          <span>{{ data.author }}</span>
-          <span>
-            {{ data.time }}
-          </span>
-        </p>
-      </div>
-    </div>
+  <div class="travel_note_brief">
+    <van-panel
+      v-bind:icon="data.img"
+      v-bind:title="data.title"
+      v-bind:desc="data.intro"
+    >
+      <div>{{data.author}} | {{ data.time }}</div>
+    </van-panel>
   </div>
 </template>
 
 <script>
-import Vue from 'vue';
-import { Image as VanImage } from 'vant';
-import { Card } from 'vant';
+import Vue from "vue";
+import { Panel } from "vant";
 
-Vue.use(Card);
-
-Vue.use(VanImage);
+Vue.use(Panel);
 
 export default {
   name: "TravelNoteBrief",
@@ -51,20 +31,35 @@ export default {
 </script>
 
 <style>
-.travel_note_left {
-  width: 20%;
-  /* background-color: #12f32f; */
-  height: 100px;
-  float: left;
+/* .travel_note_left {
+    width: 20%;
+    background-color: #12f32f;
+    height: 100px;
+    float: left;
+    }
+    .travel_note_left img {
+    width: 100px;
+    height: 100px;
+    }
+    .travel_note_right {
+    width: 80%;
+    background-color: #fff321;
+    height: 100px;
+    float: right;
+    } */
+.travel_note_brief .van-icon__image {
+  width: 5em;
+  height: 5em;
+  object-fit: contain;
 }
-.travel_note_left img {
-  width: 100px;
-  height: 100px;
+
+.travel_note_brief .van-cell {
+  color: #323233;
+  font-size: 18px;
+  line-height: 24px;
 }
-.travel_note_right {
-  width: 80%;
-  background-color: #fff321;
-  height: 100px;
+.travel_note_brief .van-panel__content {
   float: right;
+  margin-right: 30px;
 }
 </style>

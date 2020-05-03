@@ -1,5 +1,6 @@
 * 接口字典                                                              :TOC:
   - [[#user][User]]
+  - [[#travel-note-旅游足迹][Travel Note 旅游足迹]]
 
 ** User 
    - 获取所有用户
@@ -64,3 +65,11 @@
      - /user/logout
      - method: get
      - return 1 0
+** Travel Note 旅游足迹
+   - 新增路线
+   - /travel_note/add_travel_routine
+     - method: post
+     - params:
+       - name 路线名称
+       - descirption 路线描述
+     - return: id 新建的旅游路线 id

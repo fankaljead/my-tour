@@ -2,5 +2,18 @@
 
 ** my tour server
    使用 ~beego~ 框架开发
+   
+*** Run The Server
+ #+BEGIN_SRC sh
+   bee run -gendoc=true -downdoc=true
+ #+END_SRC
+
+
 ** my tour app
+
+*** Run The App
+    #+BEGIN_SRC sh
+      npm run serve
+    #+END_SRC
+
 

@@ -234,6 +234,15 @@ func init() {
 
     beego.GlobalControllerRouter["gitlab.com/fankaljead/my-tour/my-tour-server/controllers:TravelNoteController"] = append(beego.GlobalControllerRouter["gitlab.com/fankaljead/my-tour/my-tour-server/controllers:TravelNoteController"],
         beego.ControllerComments{
+            Method: "AddTravelRoutine",
+            Router: `/add_travel_routine`,
+            AllowHTTPMethods: []string{"post"},
+            MethodParams: param.Make(),
+            Filters: nil,
+            Params: nil})
+
+    beego.GlobalControllerRouter["gitlab.com/fankaljead/my-tour/my-tour-server/controllers:TravelNoteController"] = append(beego.GlobalControllerRouter["gitlab.com/fankaljead/my-tour/my-tour-server/controllers:TravelNoteController"],
+        beego.ControllerComments{
             Method: "GetAllTravelNoteInfo",
             Router: `/getAllTravelNoteInfo`,
             AllowHTTPMethods: []string{"get"},

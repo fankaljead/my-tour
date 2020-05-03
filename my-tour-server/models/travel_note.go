@@ -6,6 +6,7 @@ import (
 	"github.com/astaxie/beego/orm"
 )
 
+// TravelNote 旅行地点记录
 type TravelNote struct {
 	Id                int64  `json:"travel_note_id"`
 	AuthorId          int64  `json:"author_id"`
@@ -13,12 +14,15 @@ type TravelNote struct {
 	Place             string `json:"place"`
 	Content           string `json:"content"`
 	Cover             string `json:"cover"`
+	Longitude         string `json:"longitude"` //经度
+	Latitude          string `json:"latitude"`  //维度
 	Draft             bool   `json:"draft"`
 	TravelNoteTopicId int64  `json:"travel_note_topic_id"`
 	PublishTime       string `json:"publish_time"`
 	CreateTime        string `json:"creat_time"`
 }
 
+// TravelNoteTopic 旅行地点话题
 type TravelNoteTopic struct {
 	Id           int64  `json:"id"`
 	CreateUserId int64  `json:"create_user_id"`
@@ -27,19 +31,31 @@ type TravelNoteTopic struct {
 	CreateTime   string `json:"create_time"`
 }
 
+// TravelNoteRoutine 旅行路线
+type TravelNoteRoutine struct {
+	Id           int64     `json:"id"`
+	CreateUserId int64     `json:"create_user_id"`
+	Name         string    `json:"name"`
+	Description  string    `json:"description"`
+	CreateTime   time.Time `json:"create_time" orm:"auto_now_add;type(datetime)"`
+}
+
 func init() {
-	orm.RegisterModel(new(TravelNote), new(TravelNoteTopic))
+	orm.RegisterModel(new(TravelNote), new(TravelNoteTopic), new(TravelNoteRoutine))
 	AddATable("travel_note")
 	AddATable("travel_note_topic")
+	AddATable("travel_note_routine")
 }
 
 func AddTravelNote(title string, content string, cover string,
-	place string, user_id int64, publishTime string) (int64, error) {
+	place string, user_id int64, longitude, latitude string, publishTime string) (int64, error) {
 
 	travel_note := TravelNote{
 		AuthorId:    user_id,
 		Title:       title,
 		Content:     content,
+		Longitude:   longitude,
+		Latitude:    latitude,
 		Cover:       cover,
 		PublishTime: publishTime,
 		CreateTime:  time.Now().String(),
@@ -86,8 +102,10 @@ func GetAllUserTravelNoteInfo(user_id string) map[string]interface{} {
 		Title      string `json:"title"`
 		Cover      string `json:"cover"`
 		CreateTime string `json:"create_time"`
+		Longitude  string `json:"longitude"` //经度
+		Latitude   string `json:"latitude"`  //维度
 	}
-	nums, err := o.Raw("select id,title,cover,create_time from travel_note where author_id=" + user_id).QueryRows(&res)
+	nums, err := o.Raw("select id,title,cover,create_time,longitude,latitude from travel_note where author_id=" + user_id).QueryRows(&res)
 
 	if err == nil {
 		user_travel_note_infos["travelNoteInfos"] = res
@@ -117,4 +135,18 @@ func PublishTravelNoteDraft(travel_note_id int64) int64 {
 	}
 
 	return -1
+}
+
+// 新增旅游路线
+func AddTravelRoutine(name string, description string, user_id int64) (int64, error) {
+
+	travel_note_routine := TravelNoteRoutine{
+		Name:         name,
+		CreateUserId: user_id,
+		Description:  description}
+
+	o := orm.NewOrm()
+	id, err := o.Insert(&travel_note_routine)
+
+	return id, err
 }

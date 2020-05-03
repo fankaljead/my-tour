@@ -394,7 +394,7 @@ paths:
       tags:
       - travel_note
       description: add travel note
-      operationId: TravelNoteController.AddTravelNote
+      operationId: TravelNoteController.UpdateTravelNote
       parameters:
       - in: path
         name: title
@@ -459,6 +459,34 @@ paths:
             $ref: '#/definitions/models.TravelNote'
         "403":
           description: :uid is empty
+  /travel_note/add_travel_routine:
+    post:
+      tags:
+      - travel_note
+      description: add travel note 新增旅游路线
+      operationId: TravelNoteController.AddTravelRoutine
+      parameters:
+      - in: path
+        name: title
+        description: "true"
+        type: string
+      - in: path
+        name: content
+        description: "true"
+        type: string
+      - in: path
+        name: cover
+        description: "true"
+        type: string
+      - in: path
+        name: publishTime
+        description: "true"
+        type: string
+      responses:
+        "200":
+          description: '{int} models.TravelNote.Id'
+        "403":
+          description: body is empty
   /travel_note/getAllTravelNoteInfo:
     get:
       tags:
@@ -757,6 +785,10 @@ definitions:
         type: string
       draft:
         type: boolean
+      latitude:
+        type: string
+      longitude:
+        type: string
       place:
         type: string
       publish_time:

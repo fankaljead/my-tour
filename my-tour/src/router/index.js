@@ -9,6 +9,9 @@ import Subscribe from '../views/Subscribe'
 import Add from '../views/Add'
 import Message from '../views/Message'
 import PersonCenter from '../views/PersonCenter'
+import AddTravelRoutine from '../views/travel_note/AddTravelRoutine'
+// import AddPopMenu from '../components/add/AddPopMenu'
+
 
 
 Vue.use(VueRouter)
@@ -34,7 +37,19 @@ const routes = [{
             {
                 path: '/add',
                 name: 'add',
-                component: Add
+                component: Add,
+                children: [
+                    // {
+                    //     path: '',
+                    //     name: 'addPopMenu',
+                    //     component: AddPopMenu
+                    // },
+                    {
+                        path: '/addTravelRoutine',
+                        name: 'addTravelRoutine',
+                        component: AddTravelRoutine
+                    }
+                ]
             },
             {
                 path: '/message',

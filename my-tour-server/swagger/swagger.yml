@@ -487,6 +487,19 @@ paths:
           description: '{int} models.TravelNote.Id'
         "403":
           description: body is empty
+  /travel_note/get_travel_routines:
+    get:
+      tags:
+      - travel_note
+      description: get travel all routines by user id
+      operationId: TravelNoteController.GetTravelRoutines
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/models.TravelRoutine'
+        "403":
+          description: travel routine is empty
   /travel_note/getAllTravelNoteInfo:
     get:
       tags:
@@ -801,6 +814,9 @@ definitions:
       travel_note_topic_id:
         type: integer
         format: int64
+  models.TravelRoutine:
+    title: TravelRoutine
+    type: object
   models.User:
     title: User
     type: object

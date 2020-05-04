@@ -1,6 +1,7 @@
 package models
 
 import (
+	"strconv"
 	"time"
 
 	"github.com/astaxie/beego/orm"
@@ -35,7 +36,7 @@ type TravelNoteTopic struct {
 type TravelNoteRoutine struct {
 	Id           int64     `json:"id"`
 	CreateUserId int64     `json:"create_user_id"`
-	Name         string    `json:"name"`
+	Title        string    `json:"title"`
 	Description  string    `json:"description"`
 	CreateTime   time.Time `json:"create_time" orm:"auto_now_add;type(datetime)"`
 }
@@ -141,7 +142,7 @@ func PublishTravelNoteDraft(travel_note_id int64) int64 {
 func AddTravelRoutine(name string, description string, user_id int64) (int64, error) {
 
 	travel_note_routine := TravelNoteRoutine{
-		Name:         name,
+		Title:        name,
 		CreateUserId: user_id,
 		Description:  description}
 
@@ -149,4 +150,28 @@ func AddTravelRoutine(name string, description string, user_id int64) (int64, er
 	id, err := o.Insert(&travel_note_routine)
 
 	return id, err
+}
+
+// GetTravelRoutines 获取旅游路线
+func GetTravelRoutines(index, page_size, user_id int64) map[string]interface{} {
+	o := orm.NewOrm()
+
+	user_travel_routines_info := make(map[string]interface{})
+
+	user_travel_routines_info["user_id"] = user_id
+
+	var res []struct {
+		Id          int64  `json:"id"`
+		Title       string `json:"title"`
+		Description string `json:"description"`
+		CreateTime  string `json:"create_time"`
+	}
+	uid := int(user_id)
+	nums, err := o.Raw("select id,title,description,create_time from travel_note_routine where create_user_id=" + strconv.Itoa(uid)).QueryRows(&res)
+
+	if err == nil {
+		user_travel_routines_info["routines"] = res
+	}
+	user_travel_routines_info["number"] = nums
+	return user_travel_routines_info
 }

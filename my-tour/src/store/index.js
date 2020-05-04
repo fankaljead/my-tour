@@ -3,6 +3,7 @@ import Vuex from 'vuex'
 
 
 import user from './modules/user'
+import travel_note from './modules/travel_note'
 
 // import {
 //     request
@@ -47,5 +48,6 @@ export default new Vuex.Store({
     },
     modules: {
         user,
+        travel_note,
     }
 })

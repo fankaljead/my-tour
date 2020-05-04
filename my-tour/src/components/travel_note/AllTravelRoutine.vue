@@ -24,32 +24,33 @@ export default {
   name: "AllTravelRoutine",
   data() {
     return {
-      routines: [
-        {
-          id: 1,
-          title: "武汉敢死队",
-          description: "武汉敢死队武汉敢死队武汉敢死队",
-          createTime: "2020-5-3 18:23"
-        },
-        {
-          id: 2,
-          title: "武汉敢死队",
-          description: "武汉敢死队武汉敢死队武汉敢死队",
-          createTime: "2020-5-3 18:23"
-        },
-        {
-          id: 3,
-          itle: "武汉敢死队",
-          description: "武汉敢死队武汉敢死队武汉敢死队",
-          createTime: "2020-5-3 18:23"
-        },
-        {
-          id: 4,
-          title: "武汉敢死队",
-          description: "武汉敢死队武汉敢死队武汉敢死队",
-          createTime: "2020-5-3 18:23"
-        }
-      ]
+      // routines: [
+      //   {
+      //     id: 1,
+      //     title: "武汉敢死队",
+      //     description: "武汉敢死队武汉敢死队武汉敢死队",
+      //     createTime: "2020-5-3 18:23"
+      //   },
+      //   {
+      //     id: 2,
+      //     title: "武汉敢死队",
+      //     description: "武汉敢死队武汉敢死队武汉敢死队",
+      //     createTime: "2020-5-3 18:23"
+      //   },
+      //   {
+      //     id: 3,
+      //     itle: "武汉敢死队",
+      //     description: "武汉敢死队武汉敢死队武汉敢死队",
+      //     createTime: "2020-5-3 18:23"
+      //   },
+      //   {
+      //     id: 4,
+      //     title: "武汉敢死队",
+      //     description: "武汉敢死队武汉敢死队武汉敢死队",
+      //     createTime: "2020-5-3 18:23"
+      //   }
+      // ]
+      routines: this.$store.state.travel_note.routines
     };
   },
   methods: {

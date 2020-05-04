@@ -157,10 +157,23 @@ func (u *TravelNoteController) AddTravelRoutine() {
 	user_id := GetCurrentSessionUserIdInt64()
 
 	name := u.GetString("title")
-	description := u.GetString("content")
+	description := u.GetString("description")
 
 	id, _ := models.AddTravelRoutine(name, description, user_id)
 	u.Data["json"] = id
+
+	u.ServeJSON()
+}
+
+// @Title GetTravelRoutines
+// @Description get travel all routines by user id
+// @Success 200 {object} models.TravelRoutine
+// @Failure 403 travel routine is empty
+// @router /get_travel_routines [get]
+func (u *TravelNoteController) GetAllTravelRoutines() {
+	user_id := GetCurrentSessionUserIdInt64()
+
+	u.Data["json"] = models.GetTravelRoutines(1, 100, user_id)
 
 	u.ServeJSON()
 }

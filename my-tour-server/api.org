@@ -74,8 +74,9 @@
        - descirption 路线描述
      - return: id 新建的旅游路线 id
    - 获取全部路线
-   - /travel_note/
+   - /travel_note/get_travel_routines
      - method: get
      - params:
-       - index: 
+       - index: 页码
+       - pageSize: 每页大小
      - return: routine_list 所有路线列表

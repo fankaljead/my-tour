@@ -487,6 +487,24 @@ paths:
           description: '{int} models.TravelNote.Id'
         "403":
           description: body is empty
+  /travel_note/delete_travel_routine:
+    delete:
+      tags:
+      - travel_note
+      description: delete travel routine by id
+      operationId: TravelNoteController.DeleteTravelRoutine
+      parameters:
+      - in: path
+        name: travel_routine_id
+        description: The travel routine you want to delete
+        required: true
+        type: integer
+        format: int64
+      responses:
+        "200":
+          description: '{int} models.TravelNoteRoutine.Id'
+        "403":
+          description: body is empty
   /travel_note/get_travel_routines:
     get:
       tags:

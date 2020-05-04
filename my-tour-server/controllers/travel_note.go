@@ -1,6 +1,8 @@
 package controllers
 
 import (
+	"fmt"
+
 	"github.com/astaxie/beego"
 	"gitlab.com/fankaljead/my-tour/my-tour-server/models"
 )
@@ -174,6 +176,23 @@ func (u *TravelNoteController) GetAllTravelRoutines() {
 	user_id := GetCurrentSessionUserIdInt64()
 
 	u.Data["json"] = models.GetTravelRoutines(1, 100, user_id)
+
+	u.ServeJSON()
+}
+
+// @Title DeleteTravelRoutine
+// @Description  delete travel routine by id
+// @Param	travel_routine_id path 	int64	true		"The travel routine you want to delete"
+// @Success 200 {int} models.TravelNoteRoutine.Id
+// @Failure 403 body is empty
+// @router /delete_travel_routine [delete]
+func (u *TravelNoteController) DeleteTravelNoteRoutine() {
+	// user_id := 1
+	travel_routine_id, _ := u.GetInt64("travel_routine_id")
+	fmt.Printf("======= delete id = %d =====", travel_routine_id)
+	num := models.DeleteTravelRoutine(travel_routine_id)
+
+	u.Data["json"] = num
 
 	u.ServeJSON()
 }

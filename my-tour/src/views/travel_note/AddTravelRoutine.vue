@@ -22,7 +22,8 @@
         </van-button>
       </div>
     </van-form>
-    <AllTravelRoutine />
+    <AllTravelRoutine v-bind:routines="this.$store.state.travel_note.routines" />
+    <!-- <AllTravelRoutine /> -->
   </div>
 </template>
 
@@ -32,7 +33,7 @@ import { Form } from "vant";
 import Header from "../../components/Header";
 import AllTravelRoutine from "../../components/travel_note/AllTravelRoutine";
 
-import { ADD_TRAVEL_ROUTINE } from "../../store/mutation-types";
+import { ADD_TRAVEL_ROUTINE,GET_TRAVEL_ROUTINES } from "../../store/mutation-types";
 
 Vue.use(Form);
 
@@ -42,6 +43,10 @@ export default {
   components: {
     Header,
     AllTravelRoutine
+  },
+
+  mounted() {
+    this.$store.dispatch(GET_TRAVEL_ROUTINES)
   },
   data() {
     return {
@@ -58,6 +63,9 @@ export default {
         title: values.title,
         description: values.description
       });
+      this.title = ''
+      this.description = ''
+      this.$toast.success('新增路线成功')
     },
     back() {
       this.$router.go(-2);

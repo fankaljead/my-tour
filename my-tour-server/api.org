@@ -80,3 +80,7 @@
        - index: 页码
        - pageSize: 每页大小
      - return: routine_list 所有路线列表
+   - 删除旅行路线
+     - /travel_note/delete_travel_routine
+     - params: id 旅行路线 id
+     - return: num 删除是否成功

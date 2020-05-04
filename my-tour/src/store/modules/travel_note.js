@@ -4,7 +4,8 @@ import {
 
 import {
     ADD_TRAVEL_ROUTINE,
-    GET_TRAVEL_ROUTINES
+    GET_TRAVEL_ROUTINES,
+    DELETE_TRAVEL_ROUTINE,
 } from '../mutation-types.js'
 
 const state = () => ({
@@ -40,6 +41,16 @@ const actions = {
         }).then(res => {
             console.log("actions res: ", res);
             context.commit(GET_TRAVEL_ROUTINES, res.data)
+        })
+    },
+    [DELETE_TRAVEL_ROUTINE](context) {
+        request({
+            url: 'travel_note/delete_travel_routine',
+            method: 'get',
+        }).then(res => {
+            if (res.data > 0) {
+                context.dispatch(GET_TRAVEL_ROUTINES)
+            }
         })
     }
 

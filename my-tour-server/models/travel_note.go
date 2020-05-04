@@ -1,6 +1,7 @@
 package models
 
 import (
+	"fmt"
 	"strconv"
 	"time"
 
@@ -167,11 +168,18 @@ func GetTravelRoutines(index, page_size, user_id int64) map[string]interface{} {
 		CreateTime  string `json:"create_time"`
 	}
 	uid := int(user_id)
-	nums, err := o.Raw("select id,title,description,create_time from travel_note_routine where create_user_id=" + strconv.Itoa(uid)).QueryRows(&res)
+	nums, err := o.Raw("select id,title,description,create_time from travel_note_routine where create_user_id=" + strconv.Itoa(uid) + " order by create_time desc").QueryRows(&res)
 
 	if err == nil {
 		user_travel_routines_info["routines"] = res
 	}
 	user_travel_routines_info["number"] = nums
 	return user_travel_routines_info
+}
+
+func DeleteTravelRoutine(travel_routine_id int64) (num int64) {
+	fmt.Printf("delele routine: %d\n", travel_routine_id)
+	o := orm.NewOrm()
+	num, _ = o.Delete(&TravelNoteRoutine{Id: travel_routine_id})
+	return
 }

@@ -40,7 +40,7 @@ export default {
           break;
         // 新增路线
         case 1:
-          this.$router.replace("/add/addTravelRoutine")
+          this.$router.replace("/addTravelRoutine")
           break;
         default:
       }

@@ -73,3 +73,9 @@
        - name 路线名称
        - descirption 路线描述
      - return: id 新建的旅游路线 id
+   - 获取全部路线
+   - /travel_note/
+     - method: get
+     - params:
+       - index: 
+     - return: routine_list 所有路线列表

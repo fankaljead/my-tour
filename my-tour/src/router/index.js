@@ -41,15 +41,20 @@ const routes = [{
                 children: [
                     // {
                     //     path: '',
-                    //     name: 'addPopMenu',
-                    //     component: AddPopMenu
+                    //     name: 'add',
+                    //     component: Add
                     // },
-                    {
-                        path: '/addTravelRoutine',
-                        name: 'addTravelRoutine',
-                        component: AddTravelRoutine
-                    }
+                    // {
+                    //     path: '/addTravelRoutine',
+                    //     name: 'addTravelRoutine',
+                    //     component: AddTravelRoutine
+                    // }
                 ]
+            },
+            {
+                path: '/addTravelRoutine',
+                name: 'addTravelRoutine',
+                component: AddTravelRoutine
             },
             {
                 path: '/message',

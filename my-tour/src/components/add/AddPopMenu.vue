@@ -36,7 +36,7 @@ export default {
       switch (index) {
         // 新增地点
         case 0:
-          this.$router.replace("/subscribe");
+          this.$router.replace("/addTravelNote");
           break;
         // 新增路线
         case 1:

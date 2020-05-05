@@ -10,6 +10,7 @@ import Add from '../views/Add'
 import Message from '../views/Message'
 import PersonCenter from '../views/PersonCenter'
 import AddTravelRoutine from '../views/travel_note/AddTravelRoutine'
+import AddTravelNote from '../views/travel_note/AddTravelNote'
 // import AddPopMenu from '../components/add/AddPopMenu'
 
 
@@ -55,6 +56,11 @@ const routes = [{
                 path: '/addTravelRoutine',
                 name: 'addTravelRoutine',
                 component: AddTravelRoutine
+            },
+            {
+                path: '/addTravelNote',
+                name: 'addTravelNote',
+                component: AddTravelNote
             },
             {
                 path: '/message',

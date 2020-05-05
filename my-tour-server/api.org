@@ -84,3 +84,9 @@
      - /travel_note/delete_travel_routine
      - params: id 旅行路线 id
      - return: num 删除是否成功
+   - 新增旅游记录
+     - /travel_note
+     - method: post
+     - params:
+       - title: 名称
+       - content: 内容

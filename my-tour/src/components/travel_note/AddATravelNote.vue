@@ -1,6 +1,7 @@
 <template>
   <div>
     <van-uploader v-model="fileList" multiple />
+    <van-uploader capture="camera" />
   </div>
 </template>
 

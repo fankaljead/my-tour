@@ -99,6 +99,40 @@ paths:
       responses:
         "200":
           description: '{map[string]interface{}}'
+  /image/:
+    post:
+      tags:
+      - image
+      description: upload image
+      operationId: ImageController.Upload A Image
+      parameters:
+      - in: path
+        name: image_name
+        description: The key for staticblock
+        required: true
+        type: file
+      responses:
+        "200":
+          description: '{int} models.Image.Id'
+        "403":
+          description: file is empty
+  /image/{uid}:
+    delete:
+      tags:
+      - image
+      description: delete image
+      operationId: ImageController.Delete Image
+      parameters:
+      - in: path
+        name: uid
+        description: The image uid you want to delete
+        required: true
+        type: string
+      responses:
+        "200":
+          description: '{int} 1 delete success!'
+        "403":
+          description: 0 uid is empty
   /object/:
     get:
       tags:
@@ -890,5 +924,8 @@ tags:
   description: |
     Operations about UserInfo
 - name: hobby
+  description: |
+    Operations about UserInfo
+- name: image
   description: |
     Operations about UserInfo

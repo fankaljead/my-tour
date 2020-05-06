@@ -1,6 +1,7 @@
 * 接口字典                                                              :TOC:
   - [[#user][User]]
   - [[#travel-note-旅游足迹][Travel Note 旅游足迹]]
+  - [[#image-图片][Image 图片]]
 
 ** User 
    - 获取所有用户
@@ -90,3 +91,24 @@
      - params:
        - title: 名称
        - content: 内容
+** Image 图片
+   - 上传图片
+   - /image
+     - method: post
+     - params: file
+     - return: image_id
+   - 删除图片
+   - /image
+     - method: delete
+     - params: image_id
+     - return: rows_affect_num 是否删除
+   - 获取多张图片
+   - /image/getImagesByIds
+     - method: get
+     - params: image_id list 图片 id 列表
+     - return: Image list 图片结构数组
+   - 获取单张图片
+   - /image/getImageById
+     - method: get
+     - params: image_id  图片 id 
+     - return: Image  图片结构

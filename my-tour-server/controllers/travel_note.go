@@ -26,13 +26,15 @@ func (u *TravelNoteController) Post() {
 
 	title := u.GetString("title")
 	content := u.GetString("content")
+	routine_id, _ := u.GetInt64("routine_id")
 	longitude := u.GetString("longitude")
 	latitude := u.GetString("latitude")
 	cover := u.GetString("cover")
 	place := u.GetString("place")
 	publishTime := u.GetString("publishTime")
+	image_ids := u.GetString("image_ids")
 
-	id, _ := models.AddTravelNote(title, content, cover, place, user_id, longitude, latitude, publishTime)
+	id, _ := models.AddTravelNote(title, content, cover, place, user_id, routine_id, longitude, latitude, image_ids, publishTime)
 	u.Data["json"] = id
 
 	u.ServeJSON()

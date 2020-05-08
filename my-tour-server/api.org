@@ -90,6 +90,10 @@
      - method: post
      - params:
        - title: 名称
+       - image_ids: 图片 ids
+       - publish_time: 时间
+       - city: 城市
+       - routine_id: 路线 id
        - content: 内容
 ** Image 图片
    - 上传图片

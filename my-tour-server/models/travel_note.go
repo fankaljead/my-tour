@@ -12,6 +12,7 @@ import (
 type TravelNote struct {
 	Id                int64  `json:"travel_note_id"`
 	AuthorId          int64  `json:"author_id"`
+	RoutineId         int64  `json:"routine_id"`
 	Title             string `json:"title"`
 	Place             string `json:"place"`
 	Content           string `json:"content"`
@@ -19,6 +20,7 @@ type TravelNote struct {
 	Longitude         string `json:"longitude"` //经度
 	Latitude          string `json:"latitude"`  //维度
 	Draft             bool   `json:"draft"`
+	ImageIds          string `json:"image_ids"`
 	TravelNoteTopicId int64  `json:"travel_note_topic_id"`
 	PublishTime       string `json:"publish_time"`
 	CreateTime        string `json:"creat_time"`
@@ -50,7 +52,7 @@ func init() {
 }
 
 func AddTravelNote(title string, content string, cover string,
-	place string, user_id int64, longitude, latitude string, publishTime string) (int64, error) {
+	place string, user_id, routine_id int64, longitude, latitude, image_ids string, publishTime string) (int64, error) {
 
 	travel_note := TravelNote{
 		AuthorId:    user_id,
@@ -58,8 +60,10 @@ func AddTravelNote(title string, content string, cover string,
 		Content:     content,
 		Longitude:   longitude,
 		Latitude:    latitude,
+		RoutineId:   routine_id,
 		Cover:       cover,
 		PublishTime: publishTime,
+		ImageIds:    image_ids,
 		CreateTime:  time.Now().String(),
 		Place:       place}
 

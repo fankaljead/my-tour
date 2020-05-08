@@ -850,6 +850,8 @@ definitions:
         type: string
       draft:
         type: boolean
+      image_ids:
+        type: string
       latitude:
         type: string
       longitude:
@@ -858,6 +860,9 @@ definitions:
         type: string
       publish_time:
         type: string
+      routine_id:
+        type: integer
+        format: int64
       title:
         type: string
       travel_note_id:

@@ -6,6 +6,7 @@ import {
     ADD_TRAVEL_ROUTINE,
     GET_TRAVEL_ROUTINES,
     DELETE_TRAVEL_ROUTINE,
+    ADD_A_TRAVEL_NOTE
 } from '../mutation-types.js'
 
 const state = () => ({
@@ -17,6 +18,24 @@ const getters = {}
 
 // actions
 const actions = {
+
+    [ADD_TRAVEL_ROUTINE](context, payload) {
+        console.log("add travel routine action: " + payload)
+        context.commit(ADD_A_TRAVEL_NOTE)
+        request({
+            method: 'post',
+            params: {
+                title: payload.title,
+                content: payload.content,
+                publish_time: payload.publish_time,
+                routine_id: payload.routind_id,
+                image_ids: payload.image_ids
+            }
+        }).then(res => {
+            console.log(res)
+        })
+    },
+
     [ADD_TRAVEL_ROUTINE](context, payload) {
         console.log("add travel routine action: " + payload)
 

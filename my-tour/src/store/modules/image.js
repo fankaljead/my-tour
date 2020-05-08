@@ -42,7 +42,8 @@ const actions = {
 // mutations
 const mutations = {
     [UPLOAD_A_IMAGE](state, payload) {
-        state.upload_image_ids = state.upload_image_id == "" ? payload.id : state.upload_image_ids + ":" + payload.id
+        state.upload_image_ids = state.upload_image_ids == '' ?
+            payload.id : state.upload_image_ids + ":" + payload.id
         payload.call()
         console.log("mutations payload: ", payload);
     },

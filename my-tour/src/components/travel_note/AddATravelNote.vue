@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="add_a_travel_note">
     <!-- <van-uploader v-model="fileList" multiple /> -->
 
     <Header title="新增地点" />
@@ -155,7 +155,10 @@ import { Popup } from "vant";
 
 Vue.use(Popup);
 import { Uploader } from "vant";
-import { UPLOAD_A_IMAGE } from "../../store/mutation-types.js";
+import {
+  UPLOAD_A_IMAGE,
+  ADD_A_TRAVEL_NOTE,
+} from "../../store/mutation-types.js";
 
 Vue.use(Picker);
 Vue.use(Uploader);
@@ -182,6 +185,25 @@ export default {
     },
     onFormSubmit(values) {
       console.log("submit", values);
+      console.log("ids: ", this.$store.state.image.upload_image_ids);
+      const that = this;
+      this.$store.dispatch(ADD_A_TRAVEL_NOTE, {
+        title: values.title,
+        content: values.content,
+        publish_time: values.time,
+        routine_id: this.routine_id,
+        image_ids: this.$store.state.image.upload_image_ids,
+        call() {
+          that.title = "";
+          that.content = "";
+          that.time = "";
+          that.routine_id = 0;
+          that.routineValue = "";
+          that.image_ids = "";
+          that.fileList = [];
+          that.$toast.success("新增地点成功!");
+        },
+      });
     },
     onPlaceConfirm(value, index) {
       this.$toast(`当前值：${value}, 当前索引：${index}`);
@@ -198,7 +220,10 @@ export default {
 
     onRoutineConfirm(value, index) {
       console.log("routine select value: ", this.routines[index]);
-      this.routineValue = value;
+      this.routineValue = this.routines[index].title;
+      this.routine_id = this.routines[index].id;
+      console.log("idd=============");
+      console.log(this.routines[index].id);
       this.showRoutinePicker = false;
     },
     onRoutineChange(picker, value, index) {
@@ -309,6 +334,7 @@ export default {
       value: "",
       placeValue: "",
       routineValue: "",
+      routine_id: 0,
     };
   },
 };
@@ -317,5 +343,8 @@ export default {
 <style>
 .amap-page-container {
   height: 400px;
+}
+.add_a_travel_note {
+  margin-bottom: 70px;
 }
 </style>

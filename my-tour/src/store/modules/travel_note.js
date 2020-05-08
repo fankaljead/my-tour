@@ -11,6 +11,7 @@ import {
 
 const state = () => ({
     routines: [],
+    add_travel_note_id: 0,
 })
 
 // getters
@@ -19,20 +20,26 @@ const getters = {}
 // actions
 const actions = {
 
-    [ADD_TRAVEL_ROUTINE](context, payload) {
+    [ADD_A_TRAVEL_NOTE](context, payload) {
         console.log("add travel routine action: " + payload)
-        context.commit(ADD_A_TRAVEL_NOTE)
         request({
+            url:'travel_note',
             method: 'post',
             params: {
                 title: payload.title,
                 content: payload.content,
                 publish_time: payload.publish_time,
-                routine_id: payload.routind_id,
+                routine_id: payload.routine_id,
                 image_ids: payload.image_ids
             }
         }).then(res => {
             console.log(res)
+            if (res.data > 0) {
+                context.commit(ADD_A_TRAVEL_NOTE, {
+                    id: res.data
+                })
+                payload.call()
+            }
         })
     },
 
@@ -84,6 +91,10 @@ const mutations = {
     // },
     [GET_TRAVEL_ROUTINES](state, payload) {
         state.routines = payload.routines
+    },
+    [ADD_A_TRAVEL_NOTE](state, payload) {
+        state.add_travel_note_id = payload.id
+
     }
 }
 

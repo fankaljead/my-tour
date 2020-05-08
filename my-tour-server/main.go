@@ -38,9 +38,9 @@ func main() {
 		//AllowAllOrigins:  true,
 		AllowMethods:     []string{"*"},
 		AllowHeaders:     []string{"Origin", "Authorization", "Access-Control-Allow-Origin", "content-type"},
-		ExposeHeaders:    []string{"Content-Length", "Access-Control-Allow-Origin"},
+		ExposeHeaders:    []string{"Content-Length", "Access-Control-Allow-Origin", "content-type"},
 		AllowCredentials: true,
-		AllowOrigins:     []string{"http://10.*.*.*:*", "http://localhost:*", "http://127.0.0.1:*"},
+		AllowOrigins:     []string{"http://10.*.*.*:*", "http://localhost:*", "http://127.0.0.1:*", "*"},
 	}))
 	beego.Run()
 }

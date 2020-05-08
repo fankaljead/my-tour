@@ -1,7 +1,7 @@
 package controllers
 
 import (
-	"log"
+	"fmt"
 
 	"github.com/astaxie/beego"
 	"gitlab.com/fankaljead/my-tour/my-tour-server/models"
@@ -22,18 +22,22 @@ type ImageController struct {
 func (c *ImageController) Post() {
 	f, h, err := c.GetFile("image_name")
 	// user_id := c.GetString(":user_id")
-	user_id := "1"
+	user_id := GetCurrentSessionUserIdString()
 
 	if err != nil {
 		c.Data["json"] = 0
-		log.Fatal("getfile err ", err)
+		// log.Fatal("getfile err ", err)
+		fmt.Println(err)
 	} else {
 		image_name := beego.AppConfig.String("uploadStaticDir") + "/" + user_id + h.Filename
 		c.SaveToFile("uploadname", image_name) // 保存位置在 static/upload, 没有文件夹要先创建
 
-		num, _ := models.UploadImage(image_name)
+		id, _ := models.UploadImage(image_name)
 
-		c.Data["json"] = num
+		// m := make(map[string]int64)
+
+		// m["image_id"] = id
+		c.Data["json"] = id
 	}
 	defer f.Close()
 	c.ServeJSON()

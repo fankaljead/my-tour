@@ -1,13 +1,18 @@
 <template>
   <div>
-    <van-uploader v-model="fileList" multiple />
-    <van-uploader capture="camera" />
+    <!-- <van-uploader v-model="fileList" multiple /> -->
+    <van-uploader v-model="fileList" capture="camera" :afterRead="afterRead" />
   </div>
 </template>
 
 <script>
 import Vue from "vue";
 import { Uploader } from "vant";
+// import { fileRequest } from "../../nework/request.js";
+// import { request } from "../../nework/request.js";
+// import axios from "axios";
+
+import { UPLOAD_A_IMAGE } from "../../store/mutation-types.js";
 
 Vue.use(Uploader);
 
@@ -15,20 +20,35 @@ export default {
   name: "AddATravelNote",
   methods: {
     afterRead(file) {
-      // 此时可以自行将文件上传至服务器
       console.log(file);
-    }
+      file.status = "uploading";
+      file.message = "上传中...";
+      this.$store.dispatch(UPLOAD_A_IMAGE, {
+        file,
+        call() {
+          file.status = 'done';
+          file.message = '上传成功';
+        }
+      });
+      // fileRequest(file)
+      //   .then((response) => {
+      //     return response.text();
+      //   })
+      //   .then((res) => {
+      //     console.log("result:", res);
+      //     file.status = 'done';
+      //     file.message = '上传成功';
+      //   })
+      //   .catch((error) => console.log("error", error));
+    },
   },
   data() {
     return {
       fileList: [
-        { url: "https://img.yzcdn.cn/vant/leaf.jpg" },
-        // Uploader 根据文件后缀来判断是否为图片文件
-        // 如果图片 URL 中不包含类型信息，可以添加 isImage 标记来声明
-        { url: "https://cloud-image", isImage: true }
-      ]
+        // {url: ""}
+      ],
     };
-  }
+  },
 };
 </script>
 

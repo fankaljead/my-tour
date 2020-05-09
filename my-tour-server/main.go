@@ -34,6 +34,10 @@ func main() {
 	// 	AllowHeaders:     []string{"Origin"},
 	// 	ExposeHeaders:    []string{"Content-Length"},
 	// 	AllowCredentials: true}))
+	beego.BConfig.WebConfig.DirectoryIndex = true
+	beego.SetStaticPath(beego.AppConfig.String("statiImageUrl"),
+		beego.AppConfig.String("uploadStaticDir"))
+
 	beego.InsertFilter("*", beego.BeforeRouter, cors.Allow(&cors.Options{
 		//AllowAllOrigins:  true,
 		AllowMethods:     []string{"*"},

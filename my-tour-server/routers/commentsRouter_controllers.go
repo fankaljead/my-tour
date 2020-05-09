@@ -79,6 +79,15 @@ func init() {
             Filters: nil,
             Params: nil})
 
+    beego.GlobalControllerRouter["gitlab.com/fankaljead/my-tour/my-tour-server/controllers:ImageController"] = append(beego.GlobalControllerRouter["gitlab.com/fankaljead/my-tour/my-tour-server/controllers:ImageController"],
+        beego.ControllerComments{
+            Method: "Get",
+            Router: `/:uid`,
+            AllowHTTPMethods: []string{"get"},
+            MethodParams: param.Make(),
+            Filters: nil,
+            Params: nil})
+
     beego.GlobalControllerRouter["gitlab.com/fankaljead/my-tour/my-tour-server/controllers:ObjectController"] = append(beego.GlobalControllerRouter["gitlab.com/fankaljead/my-tour/my-tour-server/controllers:ObjectController"],
         beego.ControllerComments{
             Method: "Post",

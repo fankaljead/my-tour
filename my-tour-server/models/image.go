@@ -52,10 +52,10 @@ func GetImagesByIds(ids []int64) (images []Image) {
 }
 
 // GetImageById 获取单张图片
-func GetImageById(id int64) (images Image) {
+func GetImageById(id int64) (image Image) {
 
 	o := orm.NewOrm()
-	image := Image{Id: id}
+	image = Image{Id: id}
 	o.Read(&image)
 
 	return

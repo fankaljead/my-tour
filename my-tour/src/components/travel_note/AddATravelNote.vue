@@ -192,6 +192,7 @@ export default {
         content: values.content,
         publish_time: values.time,
         routine_id: this.routine_id,
+        cover: this.$store.state.image.upload_image_ids.toString().split(':')[0],
         image_ids: this.$store.state.image.upload_image_ids,
         call() {
           that.title = "";

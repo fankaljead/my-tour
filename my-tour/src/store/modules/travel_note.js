@@ -12,6 +12,7 @@ import {
 const state = () => ({
     routines: [],
     add_travel_note_id: 0,
+    all_travel_note_info: {},
 })
 
 // getters
@@ -30,7 +31,8 @@ const actions = {
                 content: payload.content,
                 publish_time: payload.publish_time,
                 routine_id: payload.routine_id,
-                image_ids: payload.image_ids
+                image_ids: payload.image_ids,
+                cover: payload.cover,
             }
         }).then(res => {
             console.log(res)
@@ -77,6 +79,14 @@ const actions = {
             if (res.data > 0) {
                 context.dispatch(GET_TRAVEL_ROUTINES)
             }
+        })
+    },
+    [GET_ALL_TRAVEL_NOTES](context) {
+        request({
+            url: 'travel_note/getAllTravelNote',
+            method: 'get'
+        }).then(res => {
+            context.commit(GET_ALL_TRAVEL_NOTES, res)
         })
     }
 

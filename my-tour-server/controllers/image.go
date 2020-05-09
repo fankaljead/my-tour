@@ -29,8 +29,8 @@ func (c *ImageController) Post() {
 		// log.Fatal("getfile err ", err)
 		fmt.Println(err)
 	} else {
-		image_name := beego.AppConfig.String("uploadStaticDir") + "/" + user_id + h.Filename
-		c.SaveToFile("uploadname", image_name) // 保存位置在 static/upload, 没有文件夹要先创建
+		image_name := user_id + h.Filename
+		c.SaveToFile("image_name", beego.AppConfig.String("uploadStaticDir")+"/"+image_name) // 保存位置在 static/upload, 没有文件夹要先创建
 
 		id, _ := models.UploadImage(image_name)
 
@@ -56,5 +56,18 @@ func (u *ImageController) Delete() {
 		u.Data["json"] = 0
 	}
 	u.Data["json"] = num
+	u.ServeJSON()
+}
+
+// @Title Get
+// @Description get image by uid
+// @Param	uid		path 	int	true		"The key for image"
+// @Success 200 {object} models.Image
+// @Failure 403 :uid is empty
+// @router /:uid [get]
+func (u *ImageController) Get() {
+	uid, _ := u.GetInt64(":uid")
+	image := models.GetImageById(uid)
+	u.Data["json"] = image
 	u.ServeJSON()
 }

@@ -101,6 +101,10 @@
      - method: get
      - params: travel_note_id
      - return: travel note 对象
+   - 获取全部 travel note info
+     - /travel_note/getAllTravelNoteInfo
+     - method: get
+     - return: all travel note info 所有旅行记录信息
 ** Image 图片
    - 上传图片
    - /image

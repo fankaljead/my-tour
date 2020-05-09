@@ -1,11 +1,17 @@
 <template>
   <div>
+    <ShowATravelNote />
   </div>
 </template>
 
 <script>
+import ShowATravelNote from '../../components/travel_note/ShowATravelNote'
+
 export default {
-  name: 'CheckATravelNote'
+  name: 'CheckATravelNote',
+  components:{
+    ShowATravelNote
+  }
 }
 </script>
 

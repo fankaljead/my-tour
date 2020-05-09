@@ -117,6 +117,25 @@ paths:
         "403":
           description: file is empty
   /image/{uid}:
+    get:
+      tags:
+      - image
+      description: get image by uid
+      operationId: ImageController.Get
+      parameters:
+      - in: path
+        name: uid
+        description: The key for image
+        required: true
+        type: integer
+        format: int64
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/models.Image'
+        "403":
+          description: :uid is empty
     delete:
       tags:
       - image
@@ -799,6 +818,18 @@ paths:
         "403":
           description: file is empty
 definitions:
+  models.Image:
+    title: Image
+    type: object
+    properties:
+      create_time:
+        type: string
+        format: datetime
+      id:
+        type: integer
+        format: int64
+      source:
+        type: string
   models.Object:
     title: Object
     type: object

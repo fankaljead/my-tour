@@ -1,32 +1,71 @@
 <template>
   <div class="travel_note_brief">
+    <van-divider
+      :style="{ color: '#1989fa', borderColor: '#1989fa', padding: '0 16px' }"
+    />
+
     <van-panel
-      v-bind:icon="data.img"
+      v-bind:icon="img_src"
       v-bind:title="data.title"
-      v-bind:desc="data.intro"
+      @click="travelNoteBriefClick(data.id)"
+      v-bind:desc="data.content.substring(0, 30) + '...'"
     >
-      <div>{{data.author}} | {{ data.time }}</div>
+      <div>{{ data.author_name }} | {{ data.create_time }}</div>
     </van-panel>
+
+    <!-- <van-divider
+         :style="{ color: '#1989fa', borderColor: '#1989fa', padding: '0 16px' }"
+         /> -->
   </div>
 </template>
 
 <script>
 import Vue from "vue";
 import { Panel } from "vant";
+import { Divider } from "vant";
+import { request } from "../../nework/request.js";
+import { BASE_STATIC_IMAGE_URL } from "../../uitl/consts.js";
 
+Vue.use(Divider);
 Vue.use(Panel);
 
 export default {
   name: "TravelNoteBrief",
+  data() {
+    return {
+      img_src: "",
+    };
+  },
+  methods: {
+    travelNoteBriefClick(travel_note_id) {
+      console.log("==========travelNoteBriefClick");
+      console.log(travel_note_id);
+      this.$router.push({
+        name: "checkATravelNote",
+        params: { travel_note_id: travel_note_id },
+      });
+    },
+  },
+  mounted() {
+    request({
+      // url: "image/getImageById/"+this.data.cover,
+      url: "image/" + this.data.cover,
+      method: "get",
+    }).then((res) => {
+      console.log("image res====");
+      console.log(res);
+      this.img_src = BASE_STATIC_IMAGE_URL + res.data.source;
+    });
+  },
   props: {
     data: {
       author: String,
       title: String,
       intro: String,
-      img: String,
-      time: String
-    }
-  }
+      cover: String,
+      time: String,
+    },
+  },
 };
 </script>
 
@@ -61,5 +100,8 @@ export default {
 .travel_note_brief .van-panel__content {
   float: right;
   margin-right: 30px;
+}
+.travel_note_brief {
+  margin-bottom: 40px;
 }
 </style>

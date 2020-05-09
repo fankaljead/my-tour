@@ -152,6 +152,25 @@ paths:
           description: '{int} 1 delete success!'
         "403":
           description: 0 uid is empty
+  /image/getImagesByIds:
+    get:
+      tags:
+      - image
+      description: get all Users information
+      operationId: ImageController.GetAll
+      parameters:
+      - in: path
+        name: image_ids
+        description: The ids for images
+        required: true
+        type: string
+      responses:
+        "200":
+          description: ""
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/models.Image'
   /object/:
     get:
       tags:

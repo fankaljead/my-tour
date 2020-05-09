@@ -235,7 +235,7 @@ export default {
       this.showRoutinePicker = false;
     },
     onTimeConfirm(value) {
-      this.time = value.toJSON();
+      this.time = value.toLocaleString();
       this.showTimePicker = false;
       console.log("selet time: ", this.time);
     },

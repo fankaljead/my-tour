@@ -92,6 +92,7 @@
        - title: 名称
        - image_ids: 图片 ids
        - publish_time: 时间
+       - cover: 封面图片 id
        - city: 城市
        - routine_id: 路线 id
        - content: 内容
@@ -119,7 +120,7 @@
    - 获取多张图片
    - /image/getImagesByIds
      - method: get
-     - params: image_id list 图片 id 列表
+     - params: image_ids  图片 id 列表(30:40:78)
      - return: Image list 图片结构数组
    - 获取单张图片
    - /image/getImageById

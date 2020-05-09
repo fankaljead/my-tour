@@ -1,10 +1,16 @@
 <template>
   <div>
-    <!-- <h1>{{ image.title }}</h1> -->
+    <Header title="旅行日志" />
+
+    <h1>{{}}</h1>
 
     <van-swipe :autoplay="3000">
       <van-swipe-item v-for="(image, index) in images" :key="index">
-        <img width="100%" height="auto" v-lazy="image" />
+        <img
+          width="100%"
+          height="auto"
+          v-lazy="'http://localhost:8080/public/' + image.source"
+        />
       </van-swipe-item>
     </van-swipe>
   </div>
@@ -15,6 +21,9 @@ import Vue from "vue";
 import { Swipe, SwipeItem } from "vant";
 import { Lazyload } from "vant";
 
+import Header from "../../components/Header";
+// import { BASE_STATIC_IMAGE_URL } from "../../uitl/consts.js";
+
 Vue.use(Lazyload);
 Vue.use(Swipe);
 Vue.use(SwipeItem);
@@ -22,21 +31,18 @@ Vue.use(SwipeItem);
 export default {
   name: "ShowATravelNote",
   props: {
-    image: {
-      title: String,
-      content: String,
-      id: String,
-      image_ids: String,
-      create_time: String,
-    },
+    images: Array,
+    data: {},
+  },
+  components: {
+    Header,
+  },
+  mounted() {
+    console.log("ddddd======ddddd");
+    console.log(this.data);
   },
   data() {
-    return {
-      images: [
-        "https://img.yzcdn.cn/vant/apple-1.jpg",
-        "https://img.yzcdn.cn/vant/apple-2.jpg",
-      ],
-    };
+    return {};
   },
 };
 </script>

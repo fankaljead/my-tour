@@ -110,8 +110,11 @@ func GetAllUserTravelNoteInfo(user_id string) map[string]interface{} {
 		CreateTime string `json:"create_time"`
 		Longitude  string `json:"longitude"` //经度
 		Latitude   string `json:"latitude"`  //维度
+		Content    string `json:"content"`
+		AuthorId   string `json:"author_id"`
+		AuthorName string `json:"author_name"`
 	}
-	nums, err := o.Raw("select id,title,cover,create_time,longitude,latitude from travel_note where author_id=" + user_id).QueryRows(&res)
+	nums, err := o.Raw("select travel_note.id,title,content, cover,create_time,longitude,latitude, author_id ,user.username as author_name from travel_note  LEFT JOIN user on travel_note.author_id=user.id where author_id=" + user_id + "  ORDER BY travel_note.id DESC").QueryRows(&res)
 
 	if err == nil {
 		user_travel_note_infos["travelNoteInfos"] = res

@@ -2,6 +2,8 @@ package controllers
 
 import (
 	"fmt"
+	"strconv"
+	"strings"
 
 	"github.com/astaxie/beego"
 	"gitlab.com/fankaljead/my-tour/my-tour-server/models"
@@ -69,5 +71,32 @@ func (u *ImageController) Get() {
 	uid, _ := u.GetInt64(":uid")
 	image := models.GetImageById(uid)
 	u.Data["json"] = image
+	u.ServeJSON()
+}
+
+// @Title GetAll
+// @Description get all Users information
+// @Param	image_ids		path 	string	true		"The ids for images"
+// @Success 200 {object} []models.Image
+// @router /getImagesByIds [get]
+func (u *ImageController) GetImagesByIds() {
+
+	image_ids := u.GetString("image_ids")
+
+	idss := strings.Split(image_ids, ":")
+
+	ids := []int64{}
+
+	for _, i := range idss {
+		j, err := strconv.Atoi(i)
+		if err != nil {
+			panic(err)
+		}
+		ids = append(ids, int64(j))
+	}
+
+	images := models.GetImagesByIds(ids)
+
+	u.Data["json"] = images
 	u.ServeJSON()
 }

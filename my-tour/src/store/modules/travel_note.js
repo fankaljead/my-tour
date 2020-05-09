@@ -6,13 +6,14 @@ import {
     ADD_TRAVEL_ROUTINE,
     GET_TRAVEL_ROUTINES,
     DELETE_TRAVEL_ROUTINE,
-    ADD_A_TRAVEL_NOTE
+    ADD_A_TRAVEL_NOTE,
+    GET_ALL_TRAVEL_NOTES
 } from '../mutation-types.js'
 
 const state = () => ({
     routines: [],
     add_travel_note_id: 0,
-    all_travel_note_info: {},
+    all_travel_note_infos: {},
 })
 
 // getters
@@ -22,9 +23,9 @@ const getters = {}
 const actions = {
 
     [ADD_A_TRAVEL_NOTE](context, payload) {
-        console.log("add travel routine action: " + payload)
+        console.log("add travel routine action: ", payload)
         request({
-            url:'travel_note',
+            url: 'travel_note',
             method: 'post',
             params: {
                 title: payload.title,
@@ -83,10 +84,12 @@ const actions = {
     },
     [GET_ALL_TRAVEL_NOTES](context) {
         request({
-            url: 'travel_note/getAllTravelNote',
+            url: 'travel_note/getAllTravelNoteInfo',
             method: 'get'
         }).then(res => {
-            context.commit(GET_ALL_TRAVEL_NOTES, res)
+            console.log("===get all travel note info: ======")
+            console.log(res)
+            context.commit(GET_ALL_TRAVEL_NOTES, res.data)
         })
     }
 
@@ -104,7 +107,9 @@ const mutations = {
     },
     [ADD_A_TRAVEL_NOTE](state, payload) {
         state.add_travel_note_id = payload.id
-
+    },
+    [GET_ALL_TRAVEL_NOTES](state, payload) {
+        state.all_travel_note_infos = payload
     }
 }
 

@@ -7,7 +7,7 @@
     <van-panel
       v-bind:icon="img_src"
       v-bind:title="data.title"
-      @click="travelNoteBriefClick(data.id)"
+      @click="travelNoteBriefClick(data.id, data.author_name)"
       v-bind:desc="data.content.substring(0, 30) + '...'"
     >
       <div>{{ data.author_name }} | {{ data.create_time }}</div>
@@ -37,12 +37,12 @@ export default {
     };
   },
   methods: {
-    travelNoteBriefClick(travel_note_id) {
+    travelNoteBriefClick(travel_note_id, author_name) {
       console.log("==========travelNoteBriefClick");
       console.log(travel_note_id);
       this.$router.push({
         name: "checkATravelNote",
-        params: { travel_note_id: travel_note_id },
+        params: { travel_note_id: travel_note_id, author_name: author_name },
       });
     },
   },

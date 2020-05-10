@@ -1,7 +1,14 @@
 <template>
   <div class="travel_note_brief_header">
     <van-tabs animated v-model="active" swipeable>
-      <van-tab title="我的">
+      <van-tab title="我的地点">
+        <TravelNoteBrief
+          v-for="travel_note in travel_note_infos.travelNoteInfos"
+          v-bind:data="travel_note"
+          :key="travel_note.id"
+        />
+      </van-tab>
+      <van-tab title="我的路线">
         <baidu-map
           class="map"
           :center="{ lng: 116.404, lat: 39.915 }"
@@ -19,16 +26,8 @@
           ></bm-marker>
         </baidu-map>
       </van-tab>
-      <van-tab title="推荐">
-        <TravelNoteBrief
-          v-for="travel_note in travel_note_infos.travelNoteInfos"
-          v-bind:data="travel_note"
-          :key="travel_note.id"
-        />
-
-      </van-tab>
-      <van-tab title="热榜">
-      </van-tab>
+      <!-- <van-tab title="发现">
+           </van-tab> -->
     </van-tabs>
   </div>
 </template>
@@ -66,7 +65,7 @@ export default {
         title: "摸仙煲一日游",
         content: "摸仙煲一日游摸仙煲一日游摸仙煲一日游摸仙煲一日游摸仙煲一日游",
         cover: "73",
-          // "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.5rYEZ-xCStnRSPYhA3_i_QAAAA%26pid%3DApi&f=1",
+        // "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.5rYEZ-xCStnRSPYhA3_i_QAAAA%26pid%3DApi&f=1",
         create_time: "2020-05-02",
       },
     };

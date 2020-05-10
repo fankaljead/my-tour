@@ -1,6 +1,6 @@
 <template>
   <div>
-    <ShowATravelNote :images="images" :data="data" />
+    <ShowATravelNote :images="images" :data="data" :author_name="author_name" />
   </div>
 </template>
 
@@ -19,10 +19,12 @@ export default {
       image_ids: "",
       images: [],
       data: {},
+      author_name: ""
     };
   },
   mounted() {
     this.travel_note_id = this.$route.params.travel_note_id;
+    this.author_name = this.$route.params.author_name
     request({
       url: "travel_note/" + this.travel_note_id,
       method: "get",

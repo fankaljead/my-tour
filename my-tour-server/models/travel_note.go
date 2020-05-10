@@ -23,7 +23,7 @@ type TravelNote struct {
 	ImageIds          string `json:"image_ids"`
 	TravelNoteTopicId int64  `json:"travel_note_topic_id"`
 	PublishTime       string `json:"publish_time"`
-	CreateTime        string `json:"creat_time"`
+	CreateTime        string `json:"create_time"`
 }
 
 // TravelNoteTopic 旅行地点话题

@@ -896,7 +896,7 @@ definitions:
         type: string
       cover:
         type: string
-      creat_time:
+      create_time:
         type: string
       draft:
         type: boolean

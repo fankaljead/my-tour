@@ -35,6 +35,7 @@ Vue.use(Swipe);
 Vue.use(SwipeItem);
 
 export default {
+  // helll worl
   name: "ShowATravelNote",
   props: {
     images: Array,

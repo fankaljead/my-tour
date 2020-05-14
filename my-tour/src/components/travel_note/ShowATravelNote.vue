@@ -14,6 +14,8 @@
       <van-divider />
       <div>{{data.content}}</div>
     </van-panel>
+
+    <TravelNoteComment :travel_note_id="data.travel_note_id" />
   </div>
 </template>
 
@@ -24,6 +26,7 @@ import { Lazyload } from "vant";
 
 import Header from "../../components/Header";
 // import { BASE_STATIC_IMAGE_URL } from "../../uitl/consts.js";
+import TravelNoteComment from '../../components/comment/TravelNoteComment'
 import { Panel } from 'vant';
 import { Divider } from 'vant';
 
@@ -44,6 +47,7 @@ export default {
   },
   components: {
     Header,
+    TravelNoteComment
   },
   mounted() {
     console.log("ddddd======ddddd");

@@ -15,6 +15,78 @@
     },
     "basePath": "/v1",
     "paths": {
+        "/comment/": {
+            "get": {
+                "tags": [
+                    "comment"
+                ],
+                "description": "get user travel note comments",
+                "operationId": "TravelNoteCommentController.Get Travel Note Comments",
+                "responses": {
+                    "200": {
+                        "description": "{map[string]interface{}}"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "comment"
+                ],
+                "description": "follow user",
+                "operationId": "TravelNoteCommentController.Add A Travel Note comment",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "content",
+                        "description": "The content you want to comment",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "path",
+                        "name": "travel_note_id",
+                        "description": "The travel_note_id you want to comment",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{int} models.TravelNoteComment.Id"
+                    },
+                    "403": {
+                        "description": "body is empty"
+                    }
+                }
+            }
+        },
+        "/comment/{travel_note_comment_id}": {
+            "delete": {
+                "tags": [
+                    "comment"
+                ],
+                "description": "delete the user",
+                "operationId": "TravelNoteCommentController.Delete TravelNoteComment",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "travel_note_comment_id",
+                        "description": "The travel_note_comment_id you want to delete",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{int} 1 delete success!"
+                    },
+                    "403": {
+                        "description": "0 travel_note_comment_id is empty"
+                    }
+                }
+            }
+        },
         "/fan/followUser": {
             "post": {
                 "tags": [

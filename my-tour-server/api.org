@@ -127,3 +127,24 @@
      - method: get
      - params: image_id  图片 id 
      - return: Image  图片结构
+** Comment 评论
+   - 新增评论
+   - /commet
+     - method: post
+     - params:
+       - content: 评论内容
+       - travel_note_id: 旅游记录 id
+     - return: id 新增评论 id
+   - 获取评论
+   - /commet
+     - method: get
+     - params: travel_note_id 旅游记录 id
+     - return: 
+       - data["comment"] 评论列表
+       - data["number"] 数量
+       - data["page_size"] 每页各数
+       - data["page_index"] 当前页码
+   - 删除评论
+   - /comment
+     - method: delete
+     - params: travel_note_comment_id 删除的评论 id

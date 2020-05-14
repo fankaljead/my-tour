@@ -60,6 +60,11 @@ func init() {
 				&controllers.ImageController{},
 			),
 		),
+		beego.NSNamespace("/comment",
+			beego.NSInclude(
+				&controllers.TravelNoteCommentController{},
+			),
+		),
 	)
 	beego.AddNamespace(ns)
 }

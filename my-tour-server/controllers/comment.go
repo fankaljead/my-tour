@@ -47,8 +47,24 @@ func (u *TravelNoteCommentController) Get() {
 // @Failure 403 0 travel_note_comment_id is empty
 // @router /:travel_note_comment_id [delete]
 func (u *TravelNoteCommentController) Delete() {
+	// u.Ctx.ResponseWriter.Header().Add("Access-Control-Allow-Origin", "*")
+	// u.Ctx.ResponseWriter.Header().Add("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept")
 	travel_note_comment_id, _ := u.GetInt64(":travel_note_comment_id")
 	num := models.DeleveTravelNoteComment(travel_note_comment_id)
 	u.Data["json"] = num
+	u.ServeJSON()
+}
+
+// @Title UpdateComment
+// @Description  update comment
+// @Param	comment_id path 	int	true
+// @Param	content path 	string	true
+// @Success 200 {int} models.Comment.Id
+// @Failure 403 body is empty
+// @router /update [post]
+func (u *TravelNoteCommentController) UpdateTravelNoteComment() {
+	comment_id, _ := u.GetInt64("comment_id")
+	content := u.GetString("content")
+	u.Data["json"], _ = models.UpdateTravelNoteComment(comment_id, content)
 	u.ServeJSON()
 }

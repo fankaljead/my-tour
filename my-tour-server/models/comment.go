@@ -1,6 +1,7 @@
 package models
 
 import (
+	"fmt"
 	"strconv"
 	"time"
 
@@ -59,12 +60,13 @@ func GetTravelNoteComments(page_size, page_index, travel_note_id int64) map[stri
 
 	o := orm.NewOrm()
 
-	comments := make([]TravelNoteComment, 10)
+	// comments := make([]TravelNoteComment, 10)
+	var comments []TravelNoteComment
 
 	start := page_size * (page_index - 1)
 	end := page_size * page_index
 
-	number, err := o.Raw("select * from travel_note_comment " + " where travel_note_id=" + strconv.FormatInt(travel_note_id, 10) + " limit " +
+	number, err := o.Raw("select * from travel_note_comment " + " where travel_note_id=" + strconv.FormatInt(travel_note_id, 10) + " order by id desc" + " limit " +
 		strconv.FormatInt(start, 10) +
 		"," + strconv.FormatInt(end, 10)).QueryRows(&comments)
 
@@ -77,4 +79,14 @@ func GetTravelNoteComments(page_size, page_index, travel_note_id int64) map[stri
 	travel_note_comments["page_index"] = page_index
 
 	return travel_note_comments
+}
+
+func UpdateTravelNoteComment(comment_id int64, content string) (num int64, err error) {
+	o := orm.NewOrm()
+
+	fmt.Printf("comment_id: %d\n", comment_id)
+	num, err = o.QueryTable("travel_note_comment").Filter("id", comment_id).Update(orm.Params{
+		"content": content,
+	})
+	return
 }

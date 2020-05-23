@@ -148,3 +148,9 @@
    - /comment
      - method: delete
      - params: travel_note_comment_id 删除的评论 id
+   - 修改评论
+   - /comment
+     - method: post
+     - params:
+       - comment_id 评论 id
+       - content 内容

@@ -61,6 +61,38 @@
                 }
             }
         },
+        "/comment/update": {
+            "post": {
+                "tags": [
+                    "comment"
+                ],
+                "description": "update comment",
+                "operationId": "TravelNoteCommentController.UpdateComment",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "comment_id",
+                        "description": "true",
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "in": "path",
+                        "name": "content",
+                        "description": "true",
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{int} models.Comment.Id"
+                    },
+                    "403": {
+                        "description": "body is empty"
+                    }
+                }
+            }
+        },
         "/comment/{travel_note_comment_id}": {
             "delete": {
                 "tags": [

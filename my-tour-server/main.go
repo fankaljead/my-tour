@@ -39,12 +39,14 @@ func main() {
 		beego.AppConfig.String("uploadStaticDir"))
 
 	beego.InsertFilter("*", beego.BeforeRouter, cors.Allow(&cors.Options{
-		//AllowAllOrigins:  true,
+		// AllowAllOrigins: true,
+
 		AllowMethods:     []string{"*"},
 		AllowHeaders:     []string{"Origin", "Authorization", "Access-Control-Allow-Methods", "Access-Control-Allow-Origin", "content-type"},
 		ExposeHeaders:    []string{"Content-Length", "Access-Control-Allow-Methods", "Access-Control-Allow-Origin", "content-type"},
 		AllowCredentials: true,
-		AllowOrigins:     []string{"http://10.*.*.*:*", "http://localhost:*", "http://127.0.0.1:*", "*"},
+		// AllowOrigins:     []string{"http://10.*.*.*:*", "http://localhost:*", "http://127.0.0.1:*", "*"},
+		AllowOrigins: []string{"*"},
 	}))
 	beego.Run()
 }

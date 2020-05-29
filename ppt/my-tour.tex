@@ -8,6 +8,10 @@
 \usepackage[UTF8,noindent]{ctex}
 
 \usepackage{listings}
+\usepackage{graphicx} %插入图片的宏包
+\usepackage{float} %设置图片浮动位置的宏包
+\usepackage{subfigure} %插入多图时用子图显示的宏包
+
 \lstset{
   basicstyle=\ttfamily,xleftmargin=0em,
   commentstyle=\color{teal},keywordstyle=\color{acolor4},
@@ -30,6 +34,8 @@
 \newtheorem*{example*}{例子}
 
 \renewcommand{\proofname}{证明}
+
+\graphicspath{{figures/}}
 
 \begin{document}
 
@@ -65,8 +71,9 @@
   \mylead{my-tour} 基于旅行足迹的旅行记录和分享系统的主要特点有： \pause
   \begin{itemize}[<+->]
     \item 界面简洁
+    \item 使用简单
     \item 没有广告
-    \item 免费
+    \item 免费开源
   \end{itemize}
 
 \end{frame}
@@ -74,16 +81,25 @@
 \begin{frame}{关键技术}
   \mylead{my-tour} 本系统使用的关键技术包括：\pause
   \begin{itemize}[<+->]
-    \item Golang
-    \item Beego
-    \item Vue.js
-    \item Vant
+    \item Golang \pause 一种静态强类型、编译型、并发型，并具有垃圾回收功能的编程语言 \pause
+    \item Beego \pause 一个使用 Go 的思维来帮助您构建并开发 Go 应用程序的开源框架 \pause
+    \item Vue.js \pause 一套用于构建用户界面的渐进式框架 \pause
+    \item Vant \pause 一个轻量、可靠的移动端 Vue 组件库 \pause
   \end{itemize}
 
 \end{frame}
 
-\begin{frame}{成果展示}
 
+\begin{frame}{主要功能}
+  \begin{figure}[H] %H为当前位置，!htb为忽略美学标准，htbp为浮动图形
+    \centering %图片居中
+    \includegraphics[width=0.7\textwidth]{system.png} %插入图片，[]中设置图片大小，{}中是图片文件名
+    \caption{功能结构图} %最终文档中希望显示的图片标题
+    \label{Fig.system} %用于文内引用的标签
+  \end{figure}
+\end{frame}
+
+\begin{frame}{成果展示}
 \end{frame}
 \frame[plain, label=last]{
   \vspace{2.5cm}

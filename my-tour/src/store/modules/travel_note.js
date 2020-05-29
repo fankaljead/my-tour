@@ -34,6 +34,8 @@ const actions = {
                 routine_id: payload.routine_id,
                 image_ids: payload.image_ids,
                 cover: payload.cover,
+                latitude: payload.latitude,
+                longitude: payload.longitude,
             }
         }).then(res => {
             console.log(res)

@@ -659,6 +659,19 @@ paths:
             $ref: '#/definitions/models.TravelRoutine'
         "403":
           description: travel routine is empty
+  /travel_note/getAllSubscribeTravelNoteInfo:
+    get:
+      tags:
+      - travel_note
+      description: get travel all subscribe note by user id
+      operationId: TravelNoteController.GetAllSubscribeTravelNoteInfoByUserId
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/models.TravelNote'
+        "403":
+          description: travel note info is empty
   /travel_note/getAllTravelNoteInfo:
     get:
       tags:
@@ -672,6 +685,41 @@ paths:
             $ref: '#/definitions/models.TravelNote'
         "403":
           description: travel note info is empty
+  /travel_note/getAllUserTravelNoteInfo:
+    get:
+      tags:
+      - travel_note
+      description: get travel all subscribe note by user id
+      operationId: TravelNoteController.GetAllUserTravelNoteInfoByUserId
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/models.TravelNote'
+        "403":
+          description: travel note info is empty
+  /travel_note/getTravelNotesInfoByRoutineId/{routine_id}:
+    get:
+      tags:
+      - travel_note
+      description: get travel notes by travel routine id
+      operationId: TravelNoteController.GetTravelNotesByRoutineId
+      parameters:
+      - in: path
+        name: travel_routine_id
+        description: The key for staticblock
+        required: true
+        type: integer
+        format: int64
+      responses:
+        "200":
+          description: ""
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/models.TravelNote'
+        "403":
+          description: :uid is empty
   /travel_note/publishTravelNote:
     post:
       tags:

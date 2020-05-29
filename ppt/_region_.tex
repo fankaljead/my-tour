@@ -1,0 +1,63 @@
+\message{ !name(my-tour.tex)}% -*- coding: utf-8 -*-
+% !TEX program = xelatex
+
+\documentclass[14pt,notheorems]{beamer}
+
+\usetheme[style=beta]{epyt} % alpha, beta, delta, gamma, zeta
+
+\usepackage[UTF8,noindent]{ctex}
+
+\usepackage{listings}
+\lstset{
+  basicstyle=\ttfamily,xleftmargin=0em,
+  commentstyle=\color{teal},keywordstyle=\color{acolor4},
+  language=[LaTeX]{TeX},morekeywords={usetheme,epytsetup}
+}
+
+\newcommand{\mylead}[1]{\textcolor{acolor1}{#1}}
+\newcommand{\mybold}[1]{\textcolor{acolor2}{#1}}
+\newcommand{\mywarn}[1]{\textcolor{acolor3}{#1}}
+
+\newtheorem{theorem}{定理}
+\newtheorem{definition}[theorem]{定义}
+\newtheorem{example}[theorem]{例子}
+
+\newtheorem*{theorem*}{定理}
+\newtheorem*{definition*}{定义}
+\newtheorem*{example*}{例子}
+
+\renewcommand{\proofname}{证明}
+
+\begin{document}
+
+\message{ !name(my-tour.tex) !offset(-3) }
+
+
+\title{基于旅行足迹的旅行记录和分享系统}
+\author{周翔辉}
+
+\begin{frame}[plain]\transboxout
+\titlepage
+\end{frame}
+
+%\begin{frame}\transboxin
+%\begin{center}
+%\tableofcontents[hideallsubsections]
+%\end{center}
+%\end{frame}
+
+\section{黑色文字白色背景}
+
+\begin{frame}{简要介绍}
+\mylead{Epyt} 是一个简洁美观的 Beamer 演示主题。它有这些特点：\pause
+\begin{itemize}[<+->]
+\item 结构简洁，只有包含必需元素的底栏，没有顶栏和侧栏。
+\item 内容简洁，列表环境和定理环境可以使用简单形式。
+\item 配色简洁，仅仅用到几种背景色和前景色。
+\end{itemize}
+\end{frame}
+
+
+\end{document}
+
+\message{ !name(my-tour.tex) !offset(-63) }

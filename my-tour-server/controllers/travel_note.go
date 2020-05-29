@@ -2,6 +2,7 @@ package controllers
 
 import (
 	"fmt"
+	"strconv"
 
 	"github.com/astaxie/beego"
 	"gitlab.com/fankaljead/my-tour/my-tour-server/models"
@@ -89,6 +90,18 @@ func (u *TravelNoteController) Get() {
 	u.ServeJSON()
 }
 
+// @Title GetTravelNotesByRoutineId
+// @Description get travel notes by travel routine id
+// @Param	travel_routine_id		path 	int64	true		"The key for staticblock"
+// @Success 200 {object} []models.TravelNote
+// @Failure 403 :uid is empty
+// @router /getTravelNotesInfoByRoutineId/:routine_id [get]
+func (u *TravelNoteController) GetTravelNotesByRoutineId() {
+	routine_id, _ := u.GetInt64(":routine_id")
+	u.Data["json"] = models.GetTravelNoteByRoutineId(strconv.FormatInt(routine_id, 10))
+	u.ServeJSON()
+}
+
 // @Title DeleteTravelNote
 // @Description  delete travel note by id
 // @Param	travel_note_id path 	int64	true		"The travel note you want to delete"
@@ -114,6 +127,27 @@ func (u *TravelNoteController) GetAllTravelNoteInfo() {
 	user_id := GetCurrentSessionUserIdString()
 
 	u.Data["json"] = models.GetAllUserTravelNoteInfo(user_id)
+	u.ServeJSON()
+}
+
+// @Title GetAllSubscribeTravelNoteInfoByUserId
+// @Description get travel all subscribe note by user id
+// @Success 200 {object} models.TravelNote
+// @Failure 403 travel note info is empty
+// @router /getAllSubscribeTravelNoteInfo [get]
+func (u *TravelNoteController) GetAllSubscribeTravelNoteInfo() {
+	user_id := GetCurrentSessionUserIdString()
+	u.Data["json"] = models.GetAllSubTravelNote(user_id)
+	u.ServeJSON()
+}
+
+// @Title GetAllUserTravelNoteInfoByUserId
+// @Description get travel all subscribe note by user id
+// @Success 200 {object} models.TravelNote
+// @Failure 403 travel note info is empty
+// @router /getAllUserTravelNoteInfo [get]
+func (u *TravelNoteController) GetAllUserTravelNoteInfo() {
+	u.Data["json"] = models.GetAllUserTravelNote()
 	u.ServeJSON()
 }
 

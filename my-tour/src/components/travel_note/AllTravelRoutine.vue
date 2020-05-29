@@ -10,10 +10,12 @@
     >
       <van-step v-for="routine in routines" :key="routine.id">
         <van-swipe-cell :before-close="beforeClose">
-          <!-- <van-swipe-cell > -->
-          <h3>{{ routine.title }}</h3>
-          <p>{{ routine.description }}</p>
-          <p>{{ routine.create_time }}</p>
+          <div @click="routineClick(routine.id)">
+            <!-- <van-swipe-cell > -->
+            <h3>{{ routine.title }}</h3>
+            <p>{{ routine.description }}</p>
+            <p>{{ routine.create_time }}</p>
+          </div>
           <template #right>
             <van-button
               square
@@ -45,48 +47,23 @@ export default {
   name: "AllTravelRoutine",
   data() {
     return {
-      beforeCloese: function() {}
-      // routines: [
-      //   {
-      //     id: 1,
-      //     title: "武汉敢死队",
-      //     description: "武汉敢死队武汉敢死队武汉敢死队",
-      //     createTime: "2020-5-3 18:23"
-      //   },
-      //   {
-      //     id: 2,
-      //     title: "武汉敢死队",
-      //     description: "武汉敢死队武汉敢死队武汉敢死队",
-      //     createTime: "2020-5-3 18:23"
-      //   },
-      //   {
-      //     id: 3,
-      //     itle: "武汉敢死队",
-      //     description: "武汉敢死队武汉敢死队武汉敢死队",
-      //     createTime: "2020-5-3 18:23"
-      //   },
-      //   {
-      //     id: 4,
-      //     title: "武汉敢死队",
-      //     description: "武汉敢死队武汉敢死队武汉敢死队",
-      //     createTime: "2020-5-3 18:23"
-      //   }
-      // ]
-      // routines: this.$store.state.travel_note.routines
+      beforeCloese: function () {},
     };
   },
-
   props: {
-    routines: Array
+    routines: Array,
+    call: {
+      type: Function,
+    },
   },
   methods: {
     checkRoutine(index) {
       console.log(this.routines[index]);
     },
-    delete: function() {
+    delete: function () {
       console.log("dddd======lllll");
     },
-    beforeClose({position, instance }) {
+    beforeClose({ position, instance }) {
       switch (position) {
         case "left":
         case "cell":
@@ -95,16 +72,22 @@ export default {
           break;
         case "right":
           Dialog.confirm({
-            message: "确定删除吗？"
-          }).then(() => {
-            instance.close();
-          }).catch(() => {
-            instance.close();
-          });
+            message: "确定删除吗？",
+          })
+            .then(() => {
+              instance.close();
+            })
+            .catch(() => {
+              instance.close();
+            });
           break;
       }
     },
-  }
+    routineClick(id) {
+      console.log("routine id: ", id);
+      this.call(id);
+    },
+  },
 };
 </script>
 

@@ -9,3 +9,5 @@ export const GET_ALL_TRAVEL_NOTES = 'get_all_travel_notes'
 
 
 export const UPLOAD_A_IMAGE = 'upload_a_image'
+export const UPDATE_PERSON_PROFILE = 'update_person_profile'
+

@@ -64,7 +64,7 @@ func AddTravelNote(title string, content string, cover string,
 		Cover:       cover,
 		PublishTime: publishTime,
 		ImageIds:    image_ids,
-		CreateTime:  time.Now().String(),
+		CreateTime:  time.Now().String()[:19],
 		Place:       place}
 
 	o := orm.NewOrm()
@@ -96,6 +96,61 @@ func GetTravelNote(travelNoteId int64) (TravelNote, error) {
 	return travelNote, err
 }
 
+func GetAllSubTravelNote(user_id string) map[string]interface{} {
+	o := orm.NewOrm()
+
+	user_travel_note_infos := make(map[string]interface{})
+
+	user_travel_note_infos["user_id"] = user_id
+
+	var res []struct {
+		Id         int64  `json:"id"`
+		Title      string `json:"title"`
+		Cover      string `json:"cover"`
+		CreateTime string `json:"create_time"`
+		Longitude  string `json:"longitude"` //经度
+		Latitude   string `json:"latitude"`  //维度
+		Content    string `json:"content"`
+		AuthorId   string `json:"author_id"`
+		AuthorName string `json:"author_name"`
+	}
+
+	nums, err := o.Raw("select travel_note.id,title,content, cover,create_time,longitude,latitude, author_id ,user.username as author_name from travel_note  LEFT JOIN user on travel_note.author_id=user.id where travel_note.author_id in (select fan.follower_id from fan where fan.user_id=" + user_id + " ) ORDER BY travel_note.id DESC").QueryRows(&res)
+
+	if err == nil {
+		user_travel_note_infos["travelNoteInfos"] = res
+	}
+
+	user_travel_note_infos["number"] = nums
+	return user_travel_note_infos
+}
+
+func GetAllUserTravelNote() map[string]interface{} {
+	o := orm.NewOrm()
+
+	user_travel_note_infos := make(map[string]interface{})
+
+	var res []struct {
+		Id         int64  `json:"id"`
+		Title      string `json:"title"`
+		Cover      string `json:"cover"`
+		CreateTime string `json:"create_time"`
+		Longitude  string `json:"longitude"` //经度
+		Latitude   string `json:"latitude"`  //维度
+		Content    string `json:"content"`
+		AuthorId   string `json:"author_id"`
+		AuthorName string `json:"author_name"`
+	}
+
+	nums, err := o.Raw("select travel_note.id,title,content, cover,create_time,longitude,latitude, author_id ,user.username as author_name from travel_note  LEFT JOIN user on travel_note.author_id=user.id ORDER BY travel_note.id DESC").QueryRows(&res)
+
+	if err == nil {
+		user_travel_note_infos["travelNoteInfos"] = res
+	}
+
+	user_travel_note_infos["number"] = nums
+	return user_travel_note_infos
+}
 func GetAllUserTravelNoteInfo(user_id string) map[string]interface{} {
 	o := orm.NewOrm()
 
@@ -189,4 +244,29 @@ func DeleteTravelRoutine(travel_routine_id int64) (num int64) {
 	o := orm.NewOrm()
 	num, _ = o.Delete(&TravelNoteRoutine{Id: travel_routine_id})
 	return
+}
+
+func GetTravelNoteByRoutineId(routine_id string) map[string]interface{} {
+
+	o := orm.NewOrm()
+
+	travel_notes_info := make(map[string]interface{})
+
+	travel_notes_info["travel_routine_id"] = routine_id
+
+	var res []struct {
+		Id        int64  `json:"id"`
+		Latitude  string `json:"latitude"`
+		Longitude string `json:"longitude"`
+		Cover     string `json:"cover"`
+		ImageId   string `json:"image_id"`
+		Source    string `json:"source"`
+	}
+	nums, err := o.Raw("SELECT 	travel_note.id as id,	travel_note.latitude as latitude,	travel_note.longitude as longitude ,image.id AS image_id,	image.source AS source FROM	travel_note	LEFT JOIN image ON travel_note.cover = image.id WHERE	travel_note.routine_id =" + routine_id).QueryRows(&res)
+
+	if err == nil {
+		travel_notes_info["notes"] = res
+	}
+	travel_notes_info["number"] = nums
+	return travel_notes_info
 }

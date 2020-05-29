@@ -99,18 +99,50 @@
       <van-field
         readonly
         clickable
-        label="城市"
-        :value="value"
-        placeholder="选择城市"
+        label="地点"
+        :value="
+          position.address == undefined ? '' : position.name + position.address
+        "
+        placeholder="选择地点"
         @click="showPlacePicker = true"
       />
       <van-popup v-model="showPlacePicker" round position="bottom">
-        <van-picker
-          show-toolbar
-          :columns="placeColumns"
-          @cancel="onPlaceCancel"
-          @confirm="onPlaceConfirm"
-        />
+        <div class="amap-page-container">
+          <el-amap-search-box
+            class="search-box"
+            :search-option="searchOption"
+            :on-search-result="onSearchResult"
+          ></el-amap-search-box>
+          <el-amap
+            vid="amapDemo"
+            :center="mapCenter"
+            :zoom="12"
+            class="amap-demo"
+          >
+            <el-amap-marker
+              v-for="(marker, index) in markers"
+              :position="marker"
+              :key="'lalallal' + index"
+            ></el-amap-marker>
+          </el-amap>
+        </div>
+        <!-- <template>
+             <baidu-map
+             @ready="mapReady"
+             @click="alert('pc click')"
+             class="map"
+             style="height: 500px;"
+             center="北京"
+             >
+             <bm-city-list anchor="BMAP_ANCHOR_TOP_LEFT"></bm-city-list>
+             </baidu-map>
+             </template> -->
+        <!-- <van-picker
+             show-toolbar
+             :columns="placeColumns"
+             @cancel="onPlaceCancel"
+             @confirm="onPlaceConfirm"
+             /> -->
       </van-popup>
       <!-- ====== 选择城市 end ====== -->
 
@@ -153,6 +185,9 @@ import { DatetimePicker } from "vant";
 import { Picker } from "vant";
 import { Popup } from "vant";
 
+// import { BmCityList } from "vue-baidu-map";
+import { AMapManager } from "vue-amap";
+let amapManager = new AMapManager();
 Vue.use(Popup);
 import { Uploader } from "vant";
 import {
@@ -169,8 +204,48 @@ export default {
   name: "AddATravelNote",
   components: {
     Header,
+    // BmCityList,
   },
   methods: {
+    getMapKey() {
+      return "map lalal" + this.mapKey++;
+    },
+    addMarker: function () {
+      let lng = 121.5 + Math.round(Math.random() * 1000) / 10000;
+      let lat = 31.197646 + Math.round(Math.random() * 500) / 10000;
+      this.markers.push([lng, lat]);
+    },
+    onSearchResult(pois) {
+      console.log("position: ", pois);
+      this.position = pois[0];
+
+      let latSum = 0;
+      let lngSum = 0;
+      if (pois.length > 0) {
+        pois.forEach((poi) => {
+          let { lng, lat } = poi;
+          lngSum += lng;
+          latSum += lat;
+          this.markers.push([poi.lng, poi.lat]);
+        });
+        let center = {
+          lng: lngSum / pois.length,
+          lat: latSum / pois.length,
+        };
+        this.mapCenter = [center.lng, center.lat];
+      }
+    },
+    getMap() {
+      // amap vue component
+      console.log(amapManager._componentMap);
+      // gaode map instance
+      console.log(amapManager._map);
+    },
+    // mapClick(e) {
+    //   if (e.overlay && e.overlay.customClickHandler_) {
+    //     e.overlay.customClickHandler_.call(e.overlay, e);
+    //   }
+    // },
     afterRead(file) {
       console.log(file);
       file.status = "uploading";
@@ -192,7 +267,11 @@ export default {
         content: values.content,
         publish_time: values.time,
         routine_id: this.routine_id,
-        cover: this.$store.state.image.upload_image_ids.toString().split(':')[0],
+        latitude: this.position.lat,
+        longitude: this.position.lng,
+        cover: this.$store.state.image.upload_image_ids
+          .toString()
+          .split(":")[0],
         image_ids: this.$store.state.image.upload_image_ids,
         call() {
           that.title = "";
@@ -202,6 +281,7 @@ export default {
           that.routineValue = "";
           that.image_ids = "";
           that.fileList = [];
+          that.position = {};
           that.$toast.success("新增地点成功!");
         },
       });
@@ -269,6 +349,32 @@ export default {
       this.center.lat = lat;
       this.zoom = e.target.getZoom();
     },
+    // mapReady({map }) {
+    //   // 解决移动端点击事件不生效问题
+    //   let obj = {};
+    //   map.addEventListener("touchstart", (e) => {
+    //     obj.e = e.changedTouches ? e.changedTouches[0] : e;
+    //     obj.target = e.target;
+    //     obj.time = Date.now();
+    //     obj.X = obj.e.pageX;
+    //     obj.Y = obj.e.pageY;
+    //   });
+    //   map.addEventListener("touchend", (e) => {
+    //     obj.e = e.changedTouches ? e.changedTouches[0] : e;
+    //     if (
+    //       obj.target === e.target &&
+    //       // 大于 750 可看成长按了
+    //       Date.now() - obj.time < 750 &&
+    //       // 应用勾股定理判断，如果 touchstart 的点到 touchend 的点小于 15，就可当成地图被点击了
+    //       Math.sqrt(
+    //         Math.pow(obj.X - obj.e.pageX, 2) + Math.pow(obj.Y - obj.e.pageY, 2)
+    //       ) < 15
+    //     ) {
+    //       // 这里是地图点击需要执行的操作
+    //       alert("移动端点击了地图");
+    //     }
+    //   });
+    // },
   },
 
   props: {
@@ -281,12 +387,72 @@ export default {
     }
   },
   data() {
+    let self = this;
     return {
-      center: {
-        lng: 121.480237,
-        lat: 31.236305,
-        of: "inner",
+      mapCenter: [121.59996, 31.197646],
+      amapManager,
+      mapKey: 1,
+      zoom: 12,
+      center: [121.59996, 31.197646],
+      searchOption: {
+        city: "重庆",
+        citylimit: false,
       },
+      position: {},
+      markers: [
+        [121.59996, 31.197646],
+        [121.40018, 31.197622],
+        [121.69991, 31.207649],
+      ],
+      events: {
+        init: (o) => {
+          console.log(o.getCenter());
+          console.log(this.$refs.map.$$getInstance());
+          o.getCity((result) => {
+            console.log(result);
+          });
+        },
+        moveend: () => {},
+        zoomchange: () => {},
+        click: (e) => {
+          alert("map clicked:", e);
+        },
+      },
+      loaded: false,
+      plugin: [
+        "ToolBar",
+        {
+          pName: "MapType",
+          defaultType: 0,
+          events: {
+            init(o) {
+              console.log(o);
+            },
+          },
+        },
+        {
+          pName: "Geolocation",
+          events: {
+            init(o) {
+              // o 是高德地图定位插件实例
+              o.getCurrentPosition((status, result) => {
+                if (result && result.position) {
+                  self.lng = result.position.lng;
+                  self.lat = result.position.lat;
+                  self.center = [self.lng, self.lat];
+                  self.loaded = true;
+                  self.$nextTick();
+                }
+              });
+            },
+          },
+        },
+      ],
+      // center: {
+      //   lng: 121.480237,
+      //   lat: 31.236305,
+      //   of: "inner",
+      // },
       fileList: [
         // {url: ""}
       ],
@@ -347,5 +513,14 @@ export default {
 }
 .add_a_travel_note {
   margin-bottom: 70px;
+}
+.amap-demo {
+  height: 300px;
+}
+.search-box {
+  position: absolute;
+  top: 25px;
+  left: 20px;
+  width: 80%;
 }
 </style>

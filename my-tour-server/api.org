@@ -1,5 +1,6 @@
 * 接口字典                                                              :TOC:
   - [[#user][User]]
+  - [[#userinfo-用户信息][UserInfo 用户信息]]
   - [[#travel-note-旅游足迹][Travel Note 旅游足迹]]
   - [[#image-图片][Image 图片]]
 
@@ -66,6 +67,26 @@
      - /user/logout
      - method: get
      - return 1 0
+** UserInfo 用户信息
+   - 修改用户信息
+   - /user_info
+     - method: put
+     - params:
+       - tel
+       - birthday
+       - qq
+       - email
+       - location
+       - personalized_signature
+       - wechat
+     - return: uid 新增修改个人信息
+   - 获取用户信息
+   - /user_info/:uid
+     - method: get
+     - params: uid
+     - return: user_info
+       
+
 ** Travel Note 旅游足迹
    - 新增路线
    - /travel_note/add_travel_routine

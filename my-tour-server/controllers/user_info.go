@@ -3,7 +3,6 @@ package controllers
 import (
 	"fmt"
 	"log"
-	"strconv"
 	"time"
 
 	"github.com/astaxie/beego"
@@ -28,7 +27,8 @@ func (u *UserInfoController) Put() {
 	// user_info. = u.GetString("username")
 	// user_id, _ := strconv.ParseInt(u.GetString("user_id"), 10, 64)
 	// user_id := utils.GetSessionUserId(u)
-	user_id, _ := strconv.ParseInt(u.GetString("user_id"), 10, 64)
+	// user_id, _ := strconv.ParseInt(u.GetString("user_id"), 10, 64)
+	user_id := GetCurrentSessionUserIdInt64()
 	tel := u.GetString("tel")
 	birthday := u.GetString("birthday")
 	qq := u.GetString("qq")
